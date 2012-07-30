@@ -47,32 +47,31 @@
     </div>
 
 {% endblock %}
-    <div class="container main-container">
+    <div class="container">
+      <div class="main-container">
+        <div class="main-subcontainer">
 
-      <div class="main-subcontainer">
+          <h2>{% block subtitle %}{% endblock %}</h2>
+          <div class="main-content span12" data-tmpl="{{ "/" + file.lstrip("/") }}">
+            {% block content %}
+            {% endblock %}
 
-      <h2>{% block subtitle %}{% endblock %}</h2>
-
-      <div class="main-content span12" data-tmpl="{{ "/" + file.lstrip("/") }}">
-        {% block content %}
-        {% endblock %}
-
-        <hr class="footer">
+            <hr class="footer">
 
 
-        {% block disqus %}
-        {% endblock %}
+            {% block disqus %}
+            {% endblock %}
+          </div>
+
+        </div>
       </div>
-
-      </div>
-
-{% block footer %}
+      {% block footer %}
       <footer>
         <p>This is some footer</p>
       </footer>
-{% endblock %}
-
+      {% endblock %}
     </div>
+
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 {% script src="/js/libs/underscore.js" %}
