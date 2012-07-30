@@ -16,3 +16,5 @@ How to run
     $ workon wws
     $ make
 ```
+
+- Go to http://local.yaluandmike.com/
