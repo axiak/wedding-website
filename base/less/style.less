@@ -1,4 +1,10 @@
+
+
+
 @import "bootstrap/bootstrap.less";
+
+@gridColumnWidth: 40px;
+@gridGutterWidth: 15px;
 
 body {
   padding-top: 60px;
@@ -7,18 +13,29 @@ body {
 
 @import "bootstrap/responsive.less";
 
+@media (min-width: 1200px) {
 
-/* ===== Primary Styles ========================================================
-   Author:
-   ========================================================================== */
+  #grid > .core(60px, 20px);
 
+  // Input grid
+  #grid > .input(60px, 20px);
 
+}
 
+@gridColumnWidthLarge: 60px;
+@gridGutterWidthLarge: 20px;
+body {
+  font-family: "Trykker", "Times New Roman";
+  font-weight: 400;
+  font-size: 15px;
+}
 
+h1, h2, h3, h4, h5, h6, .navbar {
+  font-family: "Arimo", "Sans-Serif";
+  font-weight: 700;
+}
 
-
-
-
-
-
+p {
+  text-align: justify;
+}
 
