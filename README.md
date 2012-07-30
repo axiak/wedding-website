@@ -1,11 +1,17 @@
-= Wedding Website
+Wedding Website
+===============
 
-== How to run
+How to run
+----------
 
 - Open command prompt and enter the directory:
 
-    cd ~/Documents/wedding-website
+```bash
+    $ cd ~/Documents/wedding-website
+```
 
-- Type 'make' to run the update program
-
-    make
+- Type workon wws, 'make' to run the update program
+```bash
+    $ workon wws
+    $ make
+```
