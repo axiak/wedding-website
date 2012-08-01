@@ -48,11 +48,11 @@
 
 {% endblock %}
     <div class="container">
-      <div class="main-container">
+      <div class="main-container span12">
         <div class="main-subcontainer">
 
           <h2>{% block subtitle %}{% endblock %}</h2>
-          <div class="main-content span12" data-tmpl="{{ "/" + file.lstrip("/") }}">
+          <div class="main-content" data-tmpl="{{ "/" + file.lstrip("/") }}">
             {% block content %}
             {% endblock %}
 

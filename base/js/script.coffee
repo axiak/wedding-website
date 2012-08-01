@@ -12,6 +12,16 @@ $ ->
       _.each afterPjax, (callback) -> callback()
   _.each afterPjax, (callback) -> callback()
 
+popped = 'state' in window.history && window.history.state isnt null
+initialURL = location.href
+
+$(window).bind 'popstate', (e) ->
+  initialPop = !popped && location.href == initialURL
+  popped = true
+  return if (initialPop)
+
+  _.each afterPjax, (callback) -> callback()
+
 slugify = (text) ->
   text
     .replace(/[\W\s]+/g, '-')

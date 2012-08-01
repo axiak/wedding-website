@@ -2,15 +2,27 @@
 
 
 @import "bootstrap/bootstrap.less";
-
-#grid > .core(45px, 15px);
-
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-
 @import "bootstrap/responsive.less";
+
+
+@purple1: #740099;
+@purple2: #4a2656;
+@purple3: #2c003b;
+@purple4: #9d27c2;
+@purple5: #a547c2;
+
+@green1: #2bb300;
+@green2: #3a642c;
+@green3: #114500;
+@green4: #53d22b;
+@green5: #6dd24d;
+@beige1: #ffffee;
+@beige2: #bfbfa3;
+
+
+@media (min-width: 767px) and (max-width: 1199px) {
+  #grid > .core(45px, 15px);
+}
 
 @media (min-width: 1200px) {
 
@@ -21,18 +33,35 @@ body {
 
 }
 
-@gridColumnWidthLarge: 60px;
-@gridGutterWidthLarge: 20px;
-html {overflow-y:scroll;}
+html {
+  overflow-y:scroll;
+  background: #223d1a;
+  background-image: url("http://s3.amazonaws.com/yaluandmike/base/img/bg.png");
+  text-shadow: 1px 1px rgba(33, 33, 33, 0.1);
+}
+
 body {
+  padding-top: 33px;
+  padding-bottom: 40px;
   font-family: "Trykker", "Times New Roman";
   font-weight: 400;
   font-size: 14px;
+  background: transparent;
 }
 
 h1, h2, h3, h4, h5, h6, .navbar {
   font-family: "Arimo", "Sans-Serif";
   font-weight: 700;
+}
+
+.main-container {
+  min-height: 700px;
+  background: @beige1; /* #f0f0f0;*/
+  .box-shadow(5px 5px 5px rgba(0, 0, 0, .3));
+  .border-radius(5px);
+  margin-left: 0;
+  padding: 35px 25px 25px;
+
 }
 
 .main-content {
@@ -41,6 +70,7 @@ h1, h2, h3, h4, h5, h6, .navbar {
     margin-top: 15px;
     }
   }
+
 
 
 figure {
