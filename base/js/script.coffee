@@ -5,7 +5,7 @@ window.$$$ = (callback) ->
   afterPjax.push(callback)
 
 $ ->
-  $("a").pjax
+  $(".navbar-inner a").pjax
     fragment: ".main-subcontainer"
     container: ".main-container"
     success: ->
@@ -56,3 +56,27 @@ $$$ ->
   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
 
 
+$$$ ->
+  console.log $("body").attr("class")
+  return unless $("body").hasClass "photos"
+
+  console.log "Running"
+  $("#photo-nav-bar a").on "click", (e) ->
+    e.preventDefault()
+    target = @hash
+    $.scrollTo target, 1000
+
+  deferreds = []
+  $(".album-container").each ->
+    deferred = $.Deferred()
+    deferreds.push deferred
+    $container = $(@)
+    $container.imagesLoaded ->
+      $container.isotope
+        masonry:
+          columnWidth: 176
+        onLayout: ->
+          deferred.resolve()
+  $.when(deferreds).then ->
+    $("#photo-nav-bar").scrollspy()
+    setTimeout (-> $("#photo-nav-bar").scrollspy("refresh")), 700

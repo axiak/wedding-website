@@ -39,7 +39,12 @@ def add_photos(obj):
             image_data[gallery_name].append(process_file(aws_conn, filepath))
 
     for key in image_data:
-        image_data[key] = [image for _, image in sorted(image_data[key])]
+        values = filter(None, [image for _, image in sorted(filter(None, image_data[key]))])
+        if values:
+            image_data[key] = values
+
+    if 'Wedding Gallery' in image_data:
+        del image_data['Wedding Gallery']
 
     obj.globals['photos'] = image_data
 
@@ -78,15 +83,25 @@ def process_file(aws_conn, filepath):
     image_result = {}
 
     for image_type, name in names.items():
+        aws_tag_path = add_size_name(name, 's3t') + '.meta'
         aws_key_path = name[len(GALLERY_DIR):].strip('/')
-        s3key = b.get_key(aws_key_path)
-        mtime = get_mtime(name)
+
         image_result[image_type] = 'http://s3.amazonaws.com/{}/{}'.format(
             BUCKET,
             aws_key_path)
 
+        if not is_newer(name, aws_tag_path):
+            continue
+
+        s3key = b.get_key(aws_key_path)
+        mtime = get_mtime(name)
+
         if s3key and s3key.last_modified:
+            print datetime.datetime(*parsedate(s3key.last_modified)[:6])
+            print mtime
             if datetime.datetime(*parsedate(s3key.last_modified)[:6]) > mtime:
+                with open(aws_tag_path, 'a'):
+                    os.utime(aws_tag_path, None)
                 continue
         print 'Sending {} to S3'.format(name)
         k = Key(b)
@@ -98,6 +113,8 @@ def process_file(aws_conn, filepath):
         k.set_contents_from_filename(name)
         k.set_acl('public-read')
 
+        with open(aws_tag_path, 'a'):
+            os.utime(aws_tag_path, None)
 
     photo_age = get_photo_age(filepath)
 
@@ -107,8 +124,19 @@ def process_file(aws_conn, filepath):
 
 def generate_200(im, target_path):
     w, h = im.size
-    h = int(200.0 / float(w) * h)
-    im = im.resize((200, h), Image.ANTIALIAS)
+    col_width = 176
+    real_w = col_width - 10
+
+    if h <= w:
+        w, h = int(real_w / float(h) * w), real_w
+    else:
+        w, h = real_w, int(real_w / float(w) * h)
+    for i in (2, 3):
+        if (i - 1) * col_width  < w < col_width * i:
+            ratio = (col_width * i - 10) / float(w)
+            w = col_width * i - 10
+            h = int(ratio * h)
+    im = im.resize((w, h), Image.ANTIALIAS)
     im.save(target_path)
 
 def generate_800(im, target_path):
@@ -130,7 +158,14 @@ def get_mtime(filepath):
     if not os.path.exists(filepath):
         return None
     else:
-        return datetime.datetime.fromtimestamp(int(os.stat(filepath).st_mtime))
+        return datetime.datetime.fromtimestamp(int(os.stat(filepath).st_mtime)) + datetime.timedelta(hours=4)
+
+def is_newer(old_file, new_file):
+    if not os.path.exists(new_file):
+        return True
+    old_mtime = os.stat(old_file).st_mtime
+    new_mtime = os.stat(old_file).st_mtime
+    return old_mtime > new_mtime
 
 
 def add_size_name(filepath, name):

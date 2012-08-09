@@ -65,6 +65,8 @@ h1, h2, h3, h4, h5, h6, .navbar {
 }
 
 .main-content {
+  position: relative;
+
   p, li {
     line-height: 22px;
     margin-top: 15px;
@@ -89,4 +91,62 @@ figure {
 hr.footer {
   border: 1px dashed #eee;
   margin-bottom: 44px;
+}
+
+
+.photos {
+  .album-spacer {
+    height: 45px;
+    width: 10px;
+    }
+  #photo-nav-bar {
+    li {
+      line-height: 18px;
+      margin-top: 0;
+      a {
+        background: @beige1;
+        font-family: "Arimo", "Sans-Serif";
+        padding-left: 0;
+        }
+      }
+
+    position: fixed;
+    top: 40px;
+    right: -5px;
+    width: 183px;
+    text-align: right;
+    }
+
+  .picture-item {
+    margin: 4px;
+    float: left;
+    img {
+      border: 1px solid black;
+      }
+    }
+}
+
+.masonry,
+.masonry .masonry-brick {
+  -webkit-transition-duration: 0.7s;
+     -moz-transition-duration: 0.7s;
+      -ms-transition-duration: 0.7s;
+       -o-transition-duration: 0.7s;
+          transition-duration: 0.7s;
+}
+
+.masonry {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+      -ms-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.masonry .masonry-brick {
+  -webkit-transition-property: left, right, top;
+     -moz-transition-property: left, right, top;
+      -ms-transition-property: left, right, top;
+       -o-transition-property: left, right, top;
+          transition-property: left, right, top;
 }
