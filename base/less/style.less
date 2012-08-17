@@ -50,8 +50,16 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6, .navbar {
-  font-family: "Arimo", "Sans-Serif";
-  font-weight: 700;
+  font-family: "Simonetta", "Sans-Serif";
+  font-weight: 900;
+  color: @purple2;
+}
+
+h5, h6, .navbar {
+  font-weight: 400;
+  b {
+    font-weight: 900;
+    }
 }
 
 .main-container {
@@ -104,21 +112,26 @@ hr.footer {
       line-height: 18px;
       margin-top: 0;
       a {
+        color: @purple2;
         background: @beige1;
         font-family: "Arimo", "Sans-Serif";
         padding-left: 0;
+        }
+      &.active {
+        a {
+          color: @purple1;
+          }
         }
       }
 
     position: fixed;
     top: 40px;
     right: -5px;
-    width: 183px;
+    width: 192px;
     text-align: right;
     }
 
   .picture-item {
-    margin: 4px;
     float: left;
     img {
       border: 1px solid black;
@@ -126,27 +139,15 @@ hr.footer {
     }
 }
 
-.masonry,
-.masonry .masonry-brick {
-  -webkit-transition-duration: 0.7s;
-     -moz-transition-duration: 0.7s;
-      -ms-transition-duration: 0.7s;
-       -o-transition-duration: 0.7s;
-          transition-duration: 0.7s;
+.gp-gallery-picture-zoom {
+    border: 1px solid #bbb;
+    margin: -6px 0 0 -6px;
+    position: absolute;
+    z-index: 100;
+    padding: 5px;
+    background: white;
+    box-shadow: 0 0 10px #999;
 }
-
-.masonry {
-  -webkit-transition-property: height, width;
-     -moz-transition-property: height, width;
-      -ms-transition-property: height, width;
-       -o-transition-property: height, width;
-          transition-property: height, width;
-}
-
-.masonry .masonry-brick {
-  -webkit-transition-property: left, right, top;
-     -moz-transition-property: left, right, top;
-      -ms-transition-property: left, right, top;
-       -o-transition-property: left, right, top;
-          transition-property: left, right, top;
+.gp-gallery-picture-hover {
+    box-shadow: 1px 1px 5px #333;
 }

@@ -47,16 +47,19 @@
     , refresh: function () {
         var self = this
           , $targets
-
+        console.log("called refresh");
         this.offsets = $([])
         this.targets = $([])
-
         $targets = this.$body
           .find(this.selector)
           .map(function () {
             var $el = $(this)
               , href = $el.data('target') || $el.attr('href')
               , $href = /^#\w/.test(href) && $(href)
+                   if ($href) {
+                       console.log($href);
+                       console.log($href.position().top);
+                   }
             return ( $href
               && href.length
               && [[ $href.position().top, href ]] ) || null
@@ -66,6 +69,7 @@
             self.offsets.push(this[0])
             self.targets.push(this[1])
           })
+        console.log(this.offsets);
       }
 
     , process: function () {
@@ -77,6 +81,8 @@
           , activeTarget = this.activeTarget
           , i
 
+        console.log(offsets);
+        console.log(scrollTop);
         if (scrollTop >= maxScroll) {
           return activeTarget != (i = targets.last()[0])
             && this.activate ( i )

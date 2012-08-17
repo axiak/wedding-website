@@ -72,11 +72,19 @@ $$$ ->
     deferreds.push deferred
     $container = $(@)
     $container.imagesLoaded ->
-      $container.isotope
-        masonry:
-          columnWidth: 176
-        onLayout: ->
-          deferred.resolve()
+      $container.gpGallery(".picture-item")
+      deferred.resolve()
   $.when(deferreds).then ->
-    $("#photo-nav-bar").scrollspy()
-    setTimeout (-> $("#photo-nav-bar").scrollspy("refresh")), 700
+    setTimeout((->
+      $("body").scrollspy("refresh")
+    ), 1000)
+    setTimeout((->
+      $("body").scrollspy("refresh")
+    ), 600)
+    setTimeout((->
+      $("body").scrollspy("refresh")
+    ), 1600)
+    setTimeout((->
+      $("body").scrollspy
+        offset: 20
+    ), 100)

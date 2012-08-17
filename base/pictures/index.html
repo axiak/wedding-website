@@ -7,7 +7,7 @@
 <div id="photo-nav-bar">
   <ul class="nav nav-tabs nav-stacked">
     {% for album in photos %}
-    <li><a href="#{{ album|replace(" ", "-")|lower }}">{{ album }}</a></li>
+    <li><a href="#{{ album|replace(" ", "-")|lower }}"><b>{</b>{{ album }}<b>}</b></a></li>
     {% endfor %}
   </ul>
 </div>
@@ -15,7 +15,7 @@
 
 {% for album, album_pics in photos.items() %}
   <div class="album-spacer" id="{{ album|replace(" ", "-")|lower }}"></div>
-  <h3>{{ album }}</h3>
+  <h3>{ {{ album }} }</h3>
   <div class="album-container">
     {% for picture in album_pics %}
     <div class="picture-item">
@@ -23,6 +23,7 @@
         <img src="{{ picture.thumbnail }}">
       </a>
     </div>{% endfor %}
+    <div class="clearfix"></div>
   </div>
 {% endfor %}
 {% endblock %}
