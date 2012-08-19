@@ -59,9 +59,7 @@ $$$ ->
 
 Blog.loadDisqus = ->
   disqus_shortname = 'yaluandmike'
-  console.log "adding?"
   return unless $("#disqus_thread").length
-  console.log "adding disqus"
   dsq = document.createElement('script')
   dsq.type = 'text/javascript'
   dsq.async = true
@@ -71,10 +69,8 @@ Blog.loadDisqus = ->
 
 
 $$$ ->
-  console.log $("body").attr("class")
   return unless $("body").hasClass "photos"
 
-  console.log "Running"
   $("#photo-nav-bar a").on "click", (e) ->
     e.preventDefault()
     target = @hash

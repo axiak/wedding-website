@@ -65,7 +65,6 @@ $$$ ->
       if numShown is 2
         $(".pipe", $btnContainer).show()
 
-      console.log data
 
 
 
