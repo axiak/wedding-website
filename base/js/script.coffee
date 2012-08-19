@@ -18,7 +18,7 @@ $ ->
   $(document).on 'pjax:start', ->
     $(".outer-container").hide()
   $(document).on 'pjax:start', ->
-    $(".outer-container").fadeIn(100)
+    $(".outer-container").fadeIn(200)
   _.each afterPjax, (callback) -> callback()
 
 popped = 'state' in window.history && window.history.state isnt null
