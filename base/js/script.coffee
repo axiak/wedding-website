@@ -1,15 +1,20 @@
 # Author: Mike
 
+window.Blog = window.Blog || {}
+
 afterPjax = []
 window.$$$ = (callback) ->
   afterPjax.push(callback)
 
-$ ->
-  $(".navbar-inner a").pjax
+Blog.pjax = (selector) ->
+  $(selector).pjax
     fragment: ".main-subcontainer"
     container: ".main-container"
     success: ->
       _.each afterPjax, (callback) -> callback()
+
+$ ->
+  Blog.pjax(".navbar-inner a")
   _.each afterPjax, (callback) -> callback()
 
 popped = 'state' in window.history && window.history.state isnt null
@@ -26,6 +31,10 @@ slugify = (text) ->
   text
     .replace(/[\W\s]+/g, '-')
     .toLowerCase()
+
+$$$ ->
+  Blog.pjax("a[data-pjax]")
+
 
 $$$ ->
   contentTmpl = $(".main-content").data("tmpl")
@@ -46,14 +55,19 @@ $$$ ->
   $("body").attr "class", slugify($("ul.nav li.active").text())
 
 $$$ ->
-  disqus_shortname = 'yaluandmike'
+  Blog.loadDisqus() if $("#disqus_thread").length
 
+Blog.loadDisqus = ->
+  disqus_shortname = 'yaluandmike'
+  console.log "adding?"
   return unless $("#disqus_thread").length
+  console.log "adding disqus"
   dsq = document.createElement('script')
   dsq.type = 'text/javascript'
   dsq.async = true
   dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
+  $("hr.footer").removeClass("hide")
 
 
 $$$ ->

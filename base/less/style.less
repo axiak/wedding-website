@@ -172,3 +172,39 @@ hr.footer {
   z-index:1000;
 }
 
+#post-container {
+  .post {
+    margin-top: 60px;
+    margin-bottom: 65px;
+    position: relative;
+    h3 {
+      a {
+      color: @purple2;
+      }
+      margin-bottom: 28px;
+      }
+
+    .time {
+      position: absolute;
+      right: 0;
+      top: 25px;
+      color: #999;
+      }
+    .comments {
+      color: @purple1;
+      text-decoration: underline;
+      &:hover {
+        text-decoration: none;
+        }
+      float: right;
+      }
+    }
+  .show-all {
+    color: @purple1;
+    margin-bottom: 10px;
+    display: block;
+    }
+}
+.post-pagination {
+  text-align: center;
+}

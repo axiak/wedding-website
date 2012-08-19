@@ -21,7 +21,7 @@
         <link href='http://fonts.googleapis.com/css?family=Simonetta:400,900|Trykker' rel='stylesheet' type='text/css'>
         {% block headjs %}{% endblock %}
   </head>
-<body>
+<body class="{{ file.strip("/").split("/")[0] }}">
 <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 {% block navbar %}
     <div class="navbar navbar-fixed-top">
@@ -41,6 +41,7 @@
               <li{% if "party/" in file %} class="active" {% endif %}><a href="/party/">Wedding Party</a></li>
               <li{% if "venue/" in file %} class="active" {% endif %}><a href="/venue/">Place &amp; Time</a></li>
               <li{% if "gifts/" in file %} class="active" {% endif %}><a href="/gifts/">Gifts</a></li>
+              <li{% if "notes/" in file %} class="active" {% endif %}><a href="/notes/">Notes</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -58,7 +59,7 @@
             {% block content %}
             {% endblock %}
 
-            <hr class="footer">
+            <hr class="footer hide">
 
 
             {% block disqus %}
@@ -74,26 +75,30 @@
       {% endblock %}
     </div>
 
+{% block endbody %}{% endblock %}
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 {% script src="/js/libs/underscore.js" %}
 {% script src="/js/libs/lightbox.js" %}
 {% script src="/js/libs/d3.v2.js" %}
 {% script src="/js/libs/bootstrap/scrollspy.js" %}
+{% script src="/js/libs/moment.min.js" %}
 {# {% script src="/js/libs/bootstrap/bootstrap." %} #}
 {% script src="/js/libs/jquery.pjax.js" %}
 {% script src="/js/libs/jquery.isotope.min.js" %}
 {% script src="/js/libs/jquery-gp-gallery.js" %}
 {% script src="/js/libs/jquery.scrollTo.js" %}
+{% script src="/js/libs/tumblelog.js" %}
 {% script src="/js/libs/num2str.js" %}
 {% coffee src="/js/script.coffee" %}
 {% coffee src="/js/nav.coffee" %}
+{% coffee src="/js/blog.coffee" %}
+
 <script type="text/javascript">
 	var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
 	(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
 	g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
 	s.parentNode.insertBefore(g,s)}(document,'script'));
 </script>
-
 </body>
 </html>
