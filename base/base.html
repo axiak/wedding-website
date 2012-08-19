@@ -52,26 +52,28 @@
 {% endblock %}
     <div class="container">
       <div class="main-container span12">
-        <div class="main-subcontainer">
+        <div class="outer-container">
+          <div class="main-subcontainer">
 
-          <h2>{% block subtitle %}{% endblock %}</h2>
-          <div class="main-content" data-tmpl="{{ "/" + file.lstrip("/") }}">
-            {% block content %}
-            {% endblock %}
+            <h2>{% block subtitle %}{% endblock %}</h2>
+            <div class="main-content" data-tmpl="{{ "/" + file.lstrip("/") }}">
+              {% block content %}
+              {% endblock %}
 
-            <hr class="footer hide">
+              <hr class="footer hide">
 
 
-            {% block disqus %}
-            {% endblock %}
+              {% block disqus %}
+              {% endblock %}
+            </div>
+
           </div>
-
         </div>
-      </div>
-      {% block footer %}
-      <footer>
-        <p>This is some footer</p>
-      </footer>
+        </div>
+        {% block footer %}
+        <footer>
+          <p>This is some footer</p>
+        </footer>
       {% endblock %}
     </div>
 
@@ -93,6 +95,8 @@
 {% coffee src="/js/script.coffee" %}
 {% coffee src="/js/nav.coffee" %}
 {% coffee src="/js/blog.coffee" %}
+
+{% include "note-tmpl.html" %}
 
 <script type="text/javascript">
 	var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];

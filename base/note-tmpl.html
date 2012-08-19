@@ -1,0 +1,39 @@
+
+<script id="tmpl-post" type="text/template">
+    <% if (post.showComments) { %>
+    <a href="/notes/" class="show-all" data-pjax>&laquo; show all notes</a>
+    <% } %>
+
+  <div class="post">
+    <h3>
+      <% if (!post.showComments) { %><a href="/notes/?post=<%= post.id %>" data-pjax>
+        <% } %>
+        <%= post.title ? post.title : "Update" %>
+    <% if (!post.showComments) { %></a><% } %></h3>
+    <span class="time">Posted on <%= post.displayTime %></span>
+    <div class="post-content">
+      <% if (post.player) { %>
+      <div class="post-player">
+        <%= post.player[2].embed_code %>
+      </div>
+      <% } %>
+      <% if (post.photos) { %>
+      <div class="post-pictures">
+        <% for (var i=0; i < post.photos.length; ++i) { %>
+           <a href="<%= post.photos[i].alt_sizes[1].url %>" rel="lightbox[post-<%= post.id %>]">
+             <img src="<%= post.photos[i].alt_sizes[3].url %>" width="<%= post.photos[i].alt_sizes[3].width %>" height="<%= post.photos[i].alt_sizes[3].height %>">
+           </a>
+        <% } %>
+      </div>
+
+      <% } %>
+      <%= post.body ? post.body : post.caption %>
+      <% if (post.showComments) { %>
+      <div id="disqus_thread" style="margin-top: 40px;"></div>
+      <% } else { %>
+      <a class="comments" href="/notes/?post=<%= post.id %>" data-pjax>See comments</a>
+      <% } %>
+    </div>
+  </div>
+</script>
+

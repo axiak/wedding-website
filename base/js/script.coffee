@@ -9,12 +9,16 @@ window.$$$ = (callback) ->
 Blog.pjax = (selector) ->
   $(selector).pjax
     fragment: ".main-subcontainer"
-    container: ".main-container"
+    container: ".outer-container"
     success: ->
       _.each afterPjax, (callback) -> callback()
 
 $ ->
   Blog.pjax(".navbar-inner a")
+  $(document).on 'pjax:start', ->
+    $(".outer-container").hide()
+  $(document).on 'pjax:start', ->
+    $(".outer-container").fadeIn(100)
   _.each afterPjax, (callback) -> callback()
 
 popped = 'state' in window.history && window.history.state isnt null
