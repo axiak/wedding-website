@@ -46,7 +46,7 @@
             }
             if (!$pic.length) return;
 
-            $this.css({width: 'auto', float: 'left', position: 'relative'});
+            $this.css({'width': 'auto', 'float': 'left', 'position': 'relative'});
 
             var item = {
                 pic: $pic,
