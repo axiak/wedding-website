@@ -19,8 +19,8 @@
   <div class="album-container">
     {% for picture in album_pics %}
     <div class="picture-item">
-      <a href="{{ picture.display }}" rel="lightbox[{{ album|replace(" ", "-")|lower }}]">
-        <img src="{{ picture.thumbnail }}">
+      <a href="{{ picture.display.url }}" rel="lightbox[{{ album|replace(" ", "-")|lower }}]">
+        <img src="{{ picture.thumbnail.url }}" width="{{ picture.thumbnail.width }}" height="{{ picture.thumbnail.height }}">
       </a>
     </div>{% endfor %}
     <div class="clearfix"></div>

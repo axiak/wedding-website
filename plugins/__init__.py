@@ -2,6 +2,7 @@ import jinja2
 import boto
 from PIL import Image
 import os
+import json
 from email.utils import parsedate
 import pyexiv2
 import datetime
@@ -86,12 +87,26 @@ def process_file(aws_conn, filepath):
         aws_tag_path = add_size_name(name, 's3t') + '.meta'
         aws_key_path = name[len(GALLERY_DIR):].strip('/')
 
-        image_result[image_type] = 'http://s3.amazonaws.com/{}/{}'.format(
+        image_result[image_type] = {
+            'url': 'http://s3.amazonaws.com/{}/{}'.format(
             BUCKET,
             aws_key_path)
+            }
 
         if not is_newer(name, aws_tag_path):
+            try:
+                resolution = load_data(aws_tag_path)
+                resolution['width']
+            except:
+                resolution = get_resolution(name)
+                save_data(aws_tag_path, resolution)
+            image_result[image_type].update(resolution)
             continue
+
+
+        resolution = get_resolution(name)
+        image_result.update(resolution)
+        save_data(aws_tag_path, resolution)
 
         s3key = b.get_key(aws_key_path)
         mtime = get_mtime(name)
@@ -120,9 +135,20 @@ def process_file(aws_conn, filepath):
 
     return photo_age, image_result
 
+def get_resolution(name):
+    im = Image.open(name)
+    size = im.size
+    return {'width': size[0], 'height': size[1]}
 
+def load_data(fname):
+    with open(fname, 'r') as f:
+        return json.loads(f.read().strip())
 
-def generate_200(im, target_path):
+def save_data(fname, data):
+    with open(fname, 'w+') as f:
+        f.write(json.dumps(data))
+
+def get_200_size(im):
     w, h = im.size
     col_width = 176
     real_w = col_width - 10
@@ -136,6 +162,11 @@ def generate_200(im, target_path):
             ratio = (col_width * i - 10) / float(w)
             w = col_width * i - 10
             h = int(ratio * h)
+    return (w, h)
+
+
+def generate_200(im, target_path):
+    w, h = get_200_size(im)
     im = im.resize((w, h), Image.ANTIALIAS)
     im.save(target_path)
 

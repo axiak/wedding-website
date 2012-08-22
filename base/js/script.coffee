@@ -85,9 +85,8 @@ $$$ ->
     deferred = $.Deferred()
     deferreds.push deferred
     $container = $(@)
-    $container.imagesLoaded ->
-      $container.gpGallery(".picture-item")
-      deferred.resolve()
+    $container.gpGallery(".picture-item")
+    deferred.resolve()
   $.when(deferreds).then ->
     setTimeout((->
       $("body").scrollspy("refresh")
