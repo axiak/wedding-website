@@ -2,21 +2,33 @@
   var afterPjax, initialURL, popped, slugify,
     __indexOf = Array.prototype.indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
+  window.Blog = window.Blog || {};
+
   afterPjax = [];
 
   window.$$$ = function(callback) {
     return afterPjax.push(callback);
   };
 
-  $(function() {
-    $("a").pjax({
+  Blog.pjax = function(selector) {
+    return $(selector).pjax({
       fragment: ".main-subcontainer",
-      container: ".main-container",
+      container: ".outer-container",
       success: function() {
         return _.each(afterPjax, function(callback) {
           return callback();
         });
       }
+    });
+  };
+
+  $(function() {
+    Blog.pjax(".navbar-inner a");
+    $(document).on('pjax:start', function() {
+      return $(".outer-container").hide();
+    });
+    $(document).on('pjax:start', function() {
+      return $(".outer-container").fadeIn(200);
     });
     return _.each(afterPjax, function(callback) {
       return callback();
@@ -40,6 +52,10 @@
   slugify = function(text) {
     return text.replace(/[\W\s]+/g, '-').toLowerCase();
   };
+
+  $$$(function() {
+    return Blog.pjax("a[data-pjax]");
+  });
 
   $$$(function() {
     var contentTmpl;
@@ -66,6 +82,10 @@
   });
 
   $$$(function() {
+    if ($("#disqus_thread").length) return Blog.loadDisqus();
+  });
+
+  Blog.loadDisqus = function() {
     var disqus_shortname, dsq;
     disqus_shortname = 'yaluandmike';
     if (!$("#disqus_thread").length) return;
@@ -73,7 +93,44 @@
     dsq.type = 'text/javascript';
     dsq.async = true;
     dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-    return (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    return $("hr.footer").removeClass("hide");
+  };
+
+  $$$(function() {
+    var deferreds;
+    if (!$("body").hasClass("photos")) return;
+    $("#photo-nav-bar a").on("click", function(e) {
+      var target;
+      e.preventDefault();
+      target = this.hash;
+      return $.scrollTo(target, 1000);
+    });
+    deferreds = [];
+    $(".album-container").each(function() {
+      var $container, deferred;
+      deferred = $.Deferred();
+      deferreds.push(deferred);
+      $container = $(this);
+      $container.gpGallery(".picture-item");
+      return deferred.resolve();
+    });
+    return $.when(deferreds).then(function() {
+      setTimeout((function() {
+        return $("body").scrollspy("refresh");
+      }), 1000);
+      setTimeout((function() {
+        return $("body").scrollspy("refresh");
+      }), 600);
+      setTimeout((function() {
+        return $("body").scrollspy("refresh");
+      }), 1600);
+      return setTimeout((function() {
+        return $("body").scrollspy({
+          offset: 20
+        });
+      }), 100);
+    });
   });
 
 }).call(this);
