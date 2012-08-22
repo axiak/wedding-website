@@ -208,3 +208,14 @@ hr.footer {
 .post-pagination {
   text-align: center;
 }
+
+.blurred {
+  -webkit-filter: blur(6px);
+  filter: blur(6px);
+  filter: url("./blur.svg#gaussian_blur");
+}
+
+.lt-ie10 .initial-backdrop {
+  opacity: 0.95;
+  filter: alpha(opacity=95);
+}

@@ -1,4 +1,4 @@
-# www.robotstxt.org/
-# http://code.google.com/web/controlcrawlindex/
+# Please don't see our site~~~
+User-Agent: *
+Disallow: /
 
-User-agent: *

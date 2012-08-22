@@ -1,8 +1,9 @@
 <!doctype html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<!--[if lt IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie10 lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js lt-ie10" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
   <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -12,7 +13,6 @@
 	<meta name="author" content="Michael and Yalu">
 
 	<meta name="viewport" content="width=device-width">
-
 
         {% less href="/less/style.less" head=True %}
         {% style href="/less/lightbox.css" head=True %}
@@ -79,12 +79,41 @@
 
 {% block endbody %}{% endblock %}
 
+<div class="modal-backdrop initial-backdrop"></div>
+<div id="pw-modal" class="modal fade in hide">
+  <div class="modal-header">
+    <h3>Password required</h3>
+  </div>
+  <form class="pw-form" action="." name="pw-form" style="margin: 0">
+    <div class="modal-body">
+      <p>
+      To access this site, answer the following question:
+      </p>
+      <tt>
+        Who isn't the best detective in the world?
+      </tt>
+      <br>
+      <input type="password" class="pw-answer">
+      <div class="alert alert-error hide">
+        <strong>Oops</strong> That's not the correct answer.
+      </div>
+    </div>
+    <div class="modal-footer">
+      <input type="submit" class="btn btn-primary" value="Enter">
+    </div>
+  </form>
+</div>
+
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 {% script src="/js/libs/underscore.js" %}
 {% script src="/js/libs/lightbox.js" %}
 {% script src="/js/libs/d3.v2.js" %}
 {% script src="/js/libs/bootstrap/scrollspy.js" %}
+{% script src="/js/libs/bootstrap/modal.js" %}
 {% script src="/js/libs/moment.min.js" %}
+{% script src="/js/libs/jquery.cookie.js" %}
+{% script src="/js/libs/sha1.js" %}
 {# {% script src="/js/libs/bootstrap/bootstrap." %} #}
 {% script src="/js/libs/jquery.pjax.js" %}
 {% script src="/js/libs/jquery.isotope.min.js" %}
@@ -92,9 +121,11 @@
 {% script src="/js/libs/jquery.scrollTo.js" %}
 {% script src="/js/libs/tumblelog.js" %}
 {% script src="/js/libs/num2str.js" %}
+{% coffee src="/js/password.coffee" %}
 {% coffee src="/js/script.coffee" %}
 {% coffee src="/js/nav.coffee" %}
 {% coffee src="/js/blog.coffee" %}
+
 
 {% include "note-tmpl.html" %}
 
