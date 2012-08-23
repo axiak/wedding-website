@@ -71,7 +71,11 @@ Blog.loadDisqus = ->
   dsq = document.createElement('script')
   dsq.type = 'text/javascript'
   dsq.async = true
-  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+  if location.protocol is 'https:'
+    queryString = '?https'
+  else
+    queryString = ''
+  dsq.src = "#{location.protocol}//#{disqus_shortname}.disqus.com/embed.js#{queryString}";
   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
   $("hr.footer").removeClass("hide")
 
