@@ -6,7 +6,7 @@ $$$ ->
   if template is false
     template = _.template($("#tmpl-post").html())
 
-  notesUrl = 'http://api.tumblr.com/v2/blog/mcaxiak.tumblr.com/posts'
+  notesUrl = "#{location.protocol}//api.tumblr.com/v2/blog/mcaxiak.tumblr.com/posts"
 
   params =
     api_key: '9T0k9Qsc5KUXwx69fDd6WtlyTEbUIxDshgBVHnOAFolcxBN5dw'
