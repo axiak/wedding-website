@@ -39,6 +39,10 @@ slugify = (text) ->
 $$$ ->
   Blog.pjax("a[data-pjax]")
 
+$ ->
+  _gaq.push ['_trackEvent', 'loadTime', location.href, undefined, parseInt(new Date() - window.startTime)]
+  _gaq.push ['_trackEvent', 'renderTime', location.href, undefined, parseInt(window.renderTime - window.startTime)]
+
 
 $$$ ->
   contentTmpl = $(".main-content").data("tmpl")

@@ -17,11 +17,13 @@ showModal = ->
     e.preventDefault()
     password = $("#pw-modal .pw-answer").val().toLowerCase()
     if mainPw[hex_sha1(password)]
+      _gaq.push ['_trackEvent', 'passwordSuccess', location.href, password, undefined]
       $.cookie pwCookieName, password,
         expires: 7
         path: '/'
       authorizeUser()
     else
+      _gaq.push ['_trackEvent', 'passwordFailure', location.href, password, undefined]
       $("#pw-modal .alert").show()
   $(".container").addClass("blurred")
   $('html').css('overflow', 'hidden')
