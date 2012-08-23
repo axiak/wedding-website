@@ -79,6 +79,8 @@ def process_file(aws_conn, filepath):
         'thumbnail': name_200,
         'display': name_800,
         }
+
+
     b = Bucket(aws_conn, BUCKET)
 
     image_result = {}
@@ -133,7 +135,18 @@ def process_file(aws_conn, filepath):
 
     photo_age = get_photo_age(filepath)
 
+    image_result['caption'] = get_caption(filepath)
+
     return photo_age, image_result
+
+def get_caption(name):
+    try:
+        exif = pyexiv2.ImageMetadata(name)
+        exif.read()
+        return exif['Xmp.dc.title'].value.values()[0]
+    except:
+        return None
+
 
 def get_resolution(name):
     im = Image.open(name)

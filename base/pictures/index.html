@@ -12,14 +12,13 @@
   </ul>
 </div>
 
-
 {% for album, album_pics in photos.items() %}
   <div class="album-spacer" id="{{ album|replace(" ", "-")|lower }}"></div>
   <h3>{ {{ album }} }</h3>
   <div class="album-container">
     {% for picture in album_pics %}
     <div class="picture-item">
-      <a href="{{ picture.display.url }}" rel="lightbox[{{ album|replace(" ", "-")|lower }}]">
+      <a href="{{ picture.display.url }}" {% if picture.caption %}title="{{ picture.caption|title }}"{% endif %} rel="lightbox[{{ album|replace(" ", "-")|lower }}]">
         <img src="{{ picture.thumbnail.url }}" width="{{ picture.thumbnail.width }}" height="{{ picture.thumbnail.height }}">
       </a>
     </div>{% endfor %}
