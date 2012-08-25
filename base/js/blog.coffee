@@ -1,7 +1,7 @@
 
 $$$ ->
   template = false
-  return unless $("body").hasClass("notes")
+  return unless $("body").hasClass("updates")
 
   if template is false
     template = _.template($("#tmpl-post").html())
@@ -32,7 +32,7 @@ $$$ ->
     jsonp: "jsonp"
     success: (data) ->
       unless data?.response?.posts?.length
-        $container.html("There are no notes to display.")
+        $container.html("There are no updates to display.")
       _.each data?.response?.posts, (post) ->
         post.displayTime = moment(post.timestamp * 1000).format "dddd, MMMM Do YYYY, h:mm a"
         post.showComments = showComments
@@ -46,9 +46,9 @@ $$$ ->
       numShown = 0
       if start > 0
         if (start - params.limit) > 0
-          href = "/notes/?after=#{start - params.limit}"
+          href = "/updates/?after=#{start - params.limit}"
         else
-          href = "/notes/"
+          href = "/updates/"
 
         $(".previous", $btnContainer)
           .attr("href", href)
@@ -58,7 +58,7 @@ $$$ ->
 
       if currentMax < data.response?.total_posts
         $(".next", $btnContainer)
-          .attr("href", "/notes/?after=#{currentMax}")
+          .attr("href", "/updates/?after=#{currentMax}")
           .show()
 
         numShown += 1
