@@ -29,8 +29,12 @@ $ ->
     $(".outer-container").fadeIn(200)
   _.each afterPjax, (callback) -> callback()
 
-popped = 'state' in window.history && window.history.state isnt null
-initialURL = location.href
+if $.browser.mozilla
+  popped = false
+else
+  popped = ('state' in window.history and window.history.state isnt null)
+
+initialURL = window.location.href
 
 $(window).bind 'popstate', (e) ->
   initialPop = !popped && location.href == initialURL
@@ -76,6 +80,7 @@ $$$ ->
 Blog.loadDisqus = ->
   disqus_shortname = 'yaluandmike'
   return unless $("#disqus_thread").length
+  console.log 'disqus?'
   dsq = document.createElement('script')
   dsq.type = 'text/javascript'
   dsq.async = true

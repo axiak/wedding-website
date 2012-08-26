@@ -5,39 +5,37 @@ class NavVisualization
   @links = [
     source: "_root"
     target: "Home"
+    thickness: 7
   ,
     source: "Home"
     target: "How we met"
+    thickness: 4
   ,
     source: "How we met"
-    target: "Engagement Story"
+    target: "Photos"
+    thickness: 2
   ,
     source: "Home"
-    target: "Engagement Story"
+    target: "Proposal"
+    thickness: 4
   ,
-    source: "Engagement Story"
-    target: "Photos"
-  ,
-    source: "Photos"
+    source: "Proposal"
     target: "Wedding Party"
+    thickness: 2
   ,
     source: "Wedding Party"
     target: "Place & Time"
+    thickness: 1
   ,
-    source: "Place & Time"
+    source: "Wedding Party"
     target: "Updates"
-  ,
-    source: "Updates"
-    target: "Other Info"
-  ,
-    source: "Other Info"
-    target: "Engagement Story"
-  ]
+    thickness: 1
 
+  ]
   @hrefs =
     "Home": "/"
     "How we met": "/story/"
-    "Engagement Story": "/engagement/"
+    "Proposal": "/engagement/"
     "Photos": "/pictures/"
     "Wedding Party": "/party/"
     "Place & Time": "/venue/"
@@ -50,6 +48,8 @@ class NavVisualization
     @hrefs = NavVisualization.hrefs
     _.bindAll @, "click", "transformFunc", "tick", "defaultIfHidden", "hasHref"
 
+    @activeLeaf = @activeFromUrl()
+    @transitionLayout = false
     @width = width
     @height = height
     @initializeNodes()
@@ -63,8 +63,29 @@ class NavVisualization
     @draw()
 
   draw: ->
+    @force
+      .nodes(d3.values(@nodes))
+      .size([@width, @height])
+      .links(@links)
+      .start()
+
     @buildLinks()
     @buildNodes()
+
+
+  activeFromUrl: ->
+    active = "Home"
+    _.each @hrefs, (v, k) ->
+      if location.pathname.indexOf(v) isnt -1
+        active = k
+        return false
+    active
+
+  isNodeActive: (node) ->
+    node.name is @activeLeaf
+
+  isLinkActive: (d) ->
+    @isNodeActive(d?.source?.name) or @isNodeActive(d?.target?.name)
 
   initializeNodes: ->
     @nodes = {}
@@ -74,25 +95,44 @@ class NavVisualization
 
   setupForce: ->
     @force = d3.layout.force()
-      .nodes(d3.values(@nodes))
-      .size([@width, @height])
-      .links(@links)
-      .charge(-600)
-      .linkDistance(100)
+      .gravity(=>
+        if @transitionLayout
+          .9
+        else
+          0.001)
+      .charge((d) =>
+        if @transitionLayout
+          -200
+        else if @isNodeActive(d)
+          -1200
+        else
+          -900)
+      .linkStrength((d) =>
+        if @isLinkActive(d)
+          0.6
+        else
+          1)
+      .theta(1)
+      .linkDistance((d) =>
+        if @isLinkActive(d)
+          300
+        else
+          Math.round((@width - 100) / 6))
       .on("tick", @tick)
-      .start()
 
   buildLinks: ->
     @link = @svg.selectAll("line.link")
       .data(@force.links())
 
     @link.enter()
-      .insert("line", ".node")
+      .append("svg:path")
+      .attr("d", "M0,-5L10,0L0,5")
       .attr("class", "link")
-      .attr("x1", (d) -> d.source.x)
-      .attr("y1", (d) -> d.source.y)
-      .attr("x2", (d) -> d.target.x)
-      .attr("y2", (d) -> d.target.y)
+      .attr("stroke-width", (d) =>  d.thickness)
+      #.attr("x1", (d) -> d.source.x)
+      #.attr("y1", (d) -> d.source.y)
+      #.attr("x2", (d) -> d.target.x)
+      #.attr("y2", (d) -> d.target.y)
     @link.exit().remove()
 
 
@@ -102,12 +142,11 @@ class NavVisualization
     @node.exit().remove()
 
     @node.enter()
-      .append("svg:rect")
-      .attr("class", "node")
-      .attr("rx", @defaultIfHidden(6, 0))
-      .attr("ry", @defaultIfHidden(6, 0))
-      .attr("width", @defaultIfHidden(150, 0))
-      .attr("height", @defaultIfHidden(20, 0))
+      .append("svg:image")
+      .attr("class", (d) => if @isNodeActive(d) then "node active" else "node")
+      .attr("xlink:href", "//s3.amazonaws.com/yaluandmike/base/img/wisteria.png")
+      .attr("width", @defaultIfHidden(100, 0))
+      .attr("height", @defaultIfHidden(80, 0))
       .call(@force.drag)
       .on("click", @click)
 
@@ -118,7 +157,7 @@ class NavVisualization
 
     @textGroup = @text.enter()
       .append("svg:g")
-      .attr("class", "node")
+      .attr("class", (d) => if @isNodeActive(d) then "node active" else "node")
       .on("click", @click)
       .call(@force.drag)
 
@@ -137,12 +176,15 @@ class NavVisualization
     href = @hrefs[d.name]
     if href
       @navigate(href)
-    else if d.children
-      d._children = d.children
-      d.children = null
-    else
-      d.children = d._children
-      d._children = null
+      @transitionLayout = true
+      @force.alpha(1)
+      @force.start()
+      setTimeout((=>
+        @transitionLayout = false
+        @force.alpha(0.1)
+        @draw()), 500)
+
+
 
   navigate: (href) ->
     e = d3.event
@@ -174,27 +216,59 @@ class NavVisualization
         def
 
   tick: ->
-    @link
-      .attr("x1", (d) -> d.source.x)
-      .attr("y1", (d) -> d.source.y)
-      .attr("x2", (d) -> d.target.x)
-      .attr("y2", (d) -> d.target.y)
+    @link.attr "d", (d) ->
+      dx = d.target.x - d.source.x
+      dy = d.target.y - d.source.y
+      dr = Math.sqrt(dx * dx + dy * dy) * 5
+      "M#{d.source.x},#{d.source.y}A#{dr},#{dr} 0 0,1 #{d.target.x},#{d.target.y}"
 
-    @node.attr("transform", @transformFunc(10))
-    @text.attr("transform", @transformFunc())
+    @node.attr("transform", @transformFunc(-8, -64))
+    @text.attr("transform", @transformFunc(15, -10))
 
-  transformFunc: (offsetY=0) ->
+  gaussian: (mu=0, sigma=1) ->
+    std = (Math.random() * 2 - 1) + (Math.random() * 2 - 1) + (Math.random() * 2 - 1)
+    std * sigma + mu
+
+  transformFunc: (offsetX=0, offsetY=0) ->
     (d) =>
+      targetPos = false
+      damper = 0.1
       if d.index is 0
-        damper = 0.1
-        d.x = d.x + (-20 - d.x) * (damper + 0.71) * 0.5
-        d.y = d.y + (@height / 2 - d.y) * (damper + 0.71) * 0.5
+        targetPos = [-20, 0]
+      else if d.index is 8
+        targetPos = [Math.round(@width * 0.7), Math.round(@height * 0.4)]
 
-      r = d.name.length
-      d.x = Math.max(-10, Math.min(@width - r, d.x))
-      d.y = Math.max(r, Math.min(@height - r, d.y))
+      if targetPos isnt false
+        d.x = d.x + (targetPos[0] - d.x) * (damper + 0.71) * @force.alpha() * 5
+        d.y = d.y + (targetPos[1] - d.y) * (damper + 0.71) * @force.alpha() * 5
+      else
+        #if @isNodeActive(d)
+        #  d.x = d.x + (0 - d.x) * (damper + 0.71) * @force.alpha() * 5
+        #  d.y = d.y + (@height - 20 - d.y) * (damper + 0.71) * @force.alpha() * 5
+        r = (d.name?.length ? 10) + 40
+        d.x = Math.max(r, Math.min(@width - r, d.x))
+        d.y = Math.max(r, Math.min(@height - r, d.y))
 
-      "translate(#{d.x}, #{d.y - offsetY})"
+      "translate(#{d.x + offsetX}, #{d.y + offsetY})"
+
+  collide: (node) ->
+    nx1 = node.x - 50
+    nx2 = node.x + 50
+    ny1 = node.y - 40
+    ny2 = node.y + 40
+    (quad, x1, y1, x2, y2) ->
+      if quad.point and (quad.point isnt node)
+        x = node.x - quad.point.x
+        y = node.y - quad.point.y
+        l = Math.sqrt(x * x + y * y)
+        r = node.radius + quad.point.radius
+        if l < r
+          l = (l - r) / l * .5
+          node.x -= x *= l
+          node.y -= y *= l
+          quad.point.x += x
+          quad.point.y += y
+      x1 > nx2 or x2 < nx1 or y1 > ny2 or y2 < ny1
 
 $ ->
   nav = new NavVisualization($(window).width(), 150)
