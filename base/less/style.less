@@ -35,18 +35,27 @@
 
 html {
   overflow-y:scroll;
-  background: #223d1a;
-  background-image: url("//s3.amazonaws.com/yaluandmike/base/img/bg.png");
+  background: #cdecc4;
+  background-image: url(//s3.amazonaws.com/yaluandmike/base/img/bg1.png), url(//s3.amazonaws.com/yaluandmike/base/img/bg2.png);
+  background-repeat: repeat-x, repeat;
+  background-attachment: fixed;
   text-shadow: 1px 1px rgba(33, 33, 33, 0.1);
 }
 
+html.svg .navbar-inner {
+  display: none;
+}
+
 body {
-  padding-top: 33px;
   padding-bottom: 40px;
   font-family: "Trykker", "Times New Roman";
   font-weight: 400;
   font-size: 14px;
   background: transparent;
+}
+
+.main-container {
+  margin-top: 33px;
 }
 
 h1, h2, h3, h4, h5, h6, .navbar {
@@ -155,16 +164,24 @@ hr.footer {
 
 
 #nav-chart {
-  circle.node {
+  .node {
     cursor: pointer;
+    }
+  rect.node {
+    fill: @purple2;
     stroke: #000;
     stroke-width: .5px;
+    }
+  text.shadow {
+    stroke: #fff;
+    stroke-width: 3px;
+    stroke-opacity: .8;
     }
 
   line.link {
     fill: none;
-    stroke: #9ecae1;
-    stroke-width: 1.5px;
+    stroke: @green3;
+    stroke-width: 4.5px;
     }
   position: absolute;
   left: 0;

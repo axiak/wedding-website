@@ -13,6 +13,14 @@ Blog.pjax = (selector) ->
     success: ->
       _.each afterPjax, (callback) -> callback()
 
+Blog.$pjax = (url) ->
+  $.pjax
+    url: url
+    fragment: ".main-subcontainer"
+    container: ".outer-container"
+    success: ->
+      _.each afterPjax, (callback) -> callback()
+
 $ ->
   Blog.pjax(".navbar-inner a")
   $(document).on 'pjax:start', ->
