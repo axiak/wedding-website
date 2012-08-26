@@ -161,7 +161,6 @@ class NavVisualization
   buildNodes: ->
     @node = @nodeRoot.selectAll("a")
       .data(@force.nodes(), (d) ->
-        console.log d
         d.name)
 
     @node.enter()
@@ -222,7 +221,6 @@ class NavVisualization
       @force.alpha(1)
       @force.start()
       @draw()
-      console.log @activeLeaf
       setTimeout((=>
         @transitionLayout = false
         @force.alpha(0.1)), 500)

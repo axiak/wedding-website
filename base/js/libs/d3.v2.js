@@ -1,4 +1,7 @@
 (function() {
+  if (!Modernizr.svg) {
+    return;
+  }
   if (!Date.now) Date.now = function() {
     return +(new Date);
   };

@@ -80,7 +80,6 @@ $$$ ->
 Blog.loadDisqus = ->
   disqus_shortname = 'yaluandmike'
   return unless $("#disqus_thread").length
-  console.log 'disqus?'
   dsq = document.createElement('script')
   dsq.type = 'text/javascript'
   dsq.async = true
@@ -105,8 +104,9 @@ $$$ ->
   $(".album-container").each ->
     deferred = $.Deferred()
     deferreds.push deferred
-    $container = $(@)
-    $container.gpGallery(".picture-item")
+    unless $("html").hasClass "lt-ie9"
+      $container = $(@)
+      $container.gpGallery(".picture-item")
     deferred.resolve()
   $.when(deferreds).then ->
     setTimeout((->
