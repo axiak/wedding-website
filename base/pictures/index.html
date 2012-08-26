@@ -5,10 +5,8 @@
 <h2>Photos</h2>
 
 <div id="photo-nav-bar">
-  <ul class="nav nav-tabs nav-stacked">
-    {% for album in photos %}
-    <li><a href="#{{ album|replace(" ", "-")|lower }}"><b>{</b>{{ album }}<b>}</b></a></li>
-    {% endfor %}
+  <ul class="nav nav-tabs">
+    {% for album in photos %}<li><a href="#{{ album|replace(" ", "-")|lower }}"><b>{</b>{{ album }}<b>}</b></a></li>{% endfor %}
   </ul>
 </div>
 
