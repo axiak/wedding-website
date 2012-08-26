@@ -30,8 +30,12 @@ class NavVisualization
     source: "Wedding Party"
     target: "Updates"
     thickness: 1
-
+  ,
+    source: "Photos"
+    target: "Other Info"
+    thickness: 1
   ]
+
   @hrefs =
     "Home": "/"
     "How we met": "/story/"
@@ -42,10 +46,18 @@ class NavVisualization
     "Updates": "/updates/"
     "Other Info": "/other/"
 
+  @pins = ->
+    "_root": [-20, 0, 1]
+    "Updates": [0.8 * @width, 0.5 * @height]
+    "How we met": [0.3 * @width, 0.7 * @height]
+    "Place & Time": [0.9 * @width, 0.3 * @height]
+    "Other Info": [0.7 * @width, 0.7 * @height]
+
   constructor: (width, height) ->
     $(".main-container").css 'margin-top', '100px'
     @links = NavVisualization.links
     @hrefs = NavVisualization.hrefs
+    @pins = NavVisualization.pins
     _.bindAll @, "click", "transformFunc", "tick", "defaultIfHidden", "hasHref"
 
     @activeLeaf = @activeFromUrl()
@@ -61,6 +73,12 @@ class NavVisualization
 
     @setupForce()
     @draw()
+
+  getValue: (prop) ->
+    if _.isFunction(@[prop])
+      @[prop]()
+    else
+      @[prop]
 
   draw: ->
     @force
@@ -122,24 +140,21 @@ class NavVisualization
 
   buildLinks: ->
     @link = @svg.selectAll("line.link")
-      .data(@force.links())
+      .data(@force.links(), (d) => "#{d.source.name}#{d.target.name}")
 
     @link.enter()
       .append("svg:path")
       .attr("d", "M0,-5L10,0L0,5")
       .attr("class", "link")
       .attr("stroke-width", (d) =>  d.thickness)
-      #.attr("x1", (d) -> d.source.x)
-      #.attr("y1", (d) -> d.source.y)
-      #.attr("x2", (d) -> d.target.x)
-      #.attr("y2", (d) -> d.target.y)
     @link.exit().remove()
 
 
   buildNodes: ->
-    @node = @svg.append("svg:g").selectAll("circle")
-      .data(@force.nodes())
-    @node.exit().remove()
+    @node = @svg.append("svg:g").selectAll("image")
+      .data(@force.nodes(), (d) ->
+        console.log d
+        d.name)
 
     @node.enter()
       .append("svg:image")
@@ -151,15 +166,15 @@ class NavVisualization
       .on("click", @click)
 
     @text = @svg.append("svg:g").selectAll("g")
-      .filter(@hasHref).data(@force.nodes())
+       .data(@force.nodes(), (d) -> d.name)
 
-    @text.exit().remove()
 
     @textGroup = @text.enter()
-      .append("svg:g")
+      .append("svg:a")
+      .attr("xlink:href", (d) => @hrefs[d.name] ? "#")
       .attr("class", (d) => if @isNodeActive(d) then "node active" else "node")
-      .on("click", @click)
       .call(@force.drag)
+      .on("click", @click)
 
     @textGroup.append("svg:text")
       .attr("x", 8)
@@ -172,27 +187,33 @@ class NavVisualization
       .attr("y", ".3em")
       .text(@defaultIfHidden(((d) -> d.name), ''))
 
+    @text.exit()
+      .remove()
+
+    @node.exit().remove()
+
+
   click: (d, i, e) ->
     href = @hrefs[d.name]
     if href
-      @navigate(href)
+      @navigate(href, d.name)
       @transitionLayout = true
       @force.alpha(1)
       @force.start()
       setTimeout((=>
         @transitionLayout = false
-        @force.alpha(0.1)
-        @draw()), 500)
+        @force.alpha(0.1)), 500)
 
 
 
-  navigate: (href) ->
+  navigate: (href, name) ->
     e = d3.event
     return if href == location.href
     if @usePjax(e, href)
+      e.preventDefault()
       Blog.$pjax href
-    else
-      window.location.href = href
+      @activeLeaf = name
+
 
   usePjax: (e, href) ->
     return false unless $.support.pjax
@@ -231,20 +252,17 @@ class NavVisualization
 
   transformFunc: (offsetX=0, offsetY=0) ->
     (d) =>
-      targetPos = false
-      damper = 0.1
-      if d.index is 0
-        targetPos = [-20, 0]
-      else if d.index is 8
-        targetPos = [Math.round(@width * 0.7), Math.round(@height * 0.4)]
+      pins = @getValue('pins')
+      targetPos = pins[d.name]
 
-      if targetPos isnt false
-        d.x = d.x + (targetPos[0] - d.x) * (damper + 0.71) * @force.alpha() * 5
-        d.y = d.y + (targetPos[1] - d.y) * (damper + 0.71) * @force.alpha() * 5
+
+      if targetPos
+        targetPos[0] = Math.round(targetPos[0])
+        targetPos[1] = Math.round(targetPos[1])
+        damper = targetPos[2] ? 0.3
+        d.x = d.x + damper * (targetPos[0] - d.x) * @force.alpha()
+        d.y = d.y + damper * (targetPos[1] - d.y) * @force.alpha()
       else
-        #if @isNodeActive(d)
-        #  d.x = d.x + (0 - d.x) * (damper + 0.71) * @force.alpha() * 5
-        #  d.y = d.y + (@height - 20 - d.y) * (damper + 0.71) * @force.alpha() * 5
         r = (d.name?.length ? 10) + 40
         d.x = Math.max(r, Math.min(@width - r, d.x))
         d.y = Math.max(r, Math.min(@height - r, d.y))
@@ -271,5 +289,15 @@ class NavVisualization
       x1 > nx2 or x2 < nx1 or y1 > ny2 or y2 < ny1
 
 $ ->
-  nav = new NavVisualization($(window).width(), 150)
+  $window = $(window)
+  windowWidth = $window.width()
+  nav = new NavVisualization(windowWidth, 150)
 
+
+  $window.on 'resize', _.debounce((->
+    return if $window.width() is windowWidth
+    nav.width = windowWidth = $window.width()
+    nav.draw()
+    ), 100)
+
+  window.nav = nav
