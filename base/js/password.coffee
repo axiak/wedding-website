@@ -26,7 +26,8 @@ showModal = ->
       _gaq.push ['_trackEvent', 'passwordFailure', location.href, password, undefined]
       $("#pw-modal .alert").show()
   $(".container").addClass("blurred")
-  $('html').css('overflow', 'hidden')
+  if $(window).width() >= 480
+    $('html').css('overflow', 'hidden')
 
 
 val = $.cookie(pwCookieName)
