@@ -21,6 +21,14 @@ Blog.$pjax = (url) ->
     success: ->
       _.each afterPjax, (callback) -> callback()
 
+Blog.isLive = (window.location.href is "www.yaluandmike.com" or window.location.href is "yaluandmike.com")
+
+Blog.url = (path) ->
+  if Blog.isLive
+    "//s3.amazonaws.com/yaluandmike/base#{path}"
+  else
+    "#{path}"
+
 $ ->
   Blog.pjax(".navbar-inner a")
   $(document).on 'pjax:start', ->

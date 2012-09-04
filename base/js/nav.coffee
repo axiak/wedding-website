@@ -170,15 +170,15 @@ class NavVisualization
       .call(@force.drag)
       .on("click", @click)
       .append("svg:image")
-      .attr("xlink:href", @activeDefaultHidden("//s3.amazonaws.com/yaluandmike/base/img/wisteria.png", "//s3.amazonaws.com/yaluandmike/base/img/wisteria.png", ""))
-      .attr("width", @defaultIfHidden(100, 0))
-      .attr("height", @defaultIfHidden(80, 0))
+      .attr("xlink:href", @activeDefaultHidden(Blog.url("/img/wisteria.png"), Blog.url("/img/wisteria.png"), ""))
+      .attr("width", @defaultIfHidden(27, 0))
+      .attr("height", @defaultIfHidden(72, 0))
 
 
     @node.selectAll("image").transition()
       .attr("xlink:href", @activeDefaultHidden(
-        "//s3.amazonaws.com/yaluandmike/base/img/wisteria-active.png",
-        "//s3.amazonaws.com/yaluandmike/base/img/wisteria.png",
+        Blog.url("/img/wisteria-active.png"),
+        Blog.url("/img/wisteria.png"),
         ""))
 
 
@@ -270,14 +270,16 @@ class NavVisualization
         def
 
   tick: ->
-    @link.attr "d", (d) ->
+    @link.attr "d", (d) =>
+      @bbox(d.source)
+      @bbox(d.target)
       dx = d.target.x - d.source.x
       dy = d.target.y - d.source.y
       dr = Math.sqrt(dx * dx + dy * dy) * 5
       "M#{d.source.x},#{d.source.y}A#{dr},#{dr} 0 0,1 #{d.target.x},#{d.target.y}"
 
-    @node.attr("transform", @transformFunc(-8, -64, true))
-    @text.attr("transform", @transformFunc(15, 0))
+    @node.attr("transform", @transformFunc(-6, -2, true))
+    @text.attr("transform", @transformFunc(0, 0))
 
   gaussian: (mu=0, sigma=1) ->
     std = (Math.random() * 2 - 1) + (Math.random() * 2 - 1) + (Math.random() * 2 - 1)
@@ -297,11 +299,15 @@ class NavVisualization
         d.x = d.x + damper * (targetPos[0] - d.x) * @force.alpha()
         d.y = d.y + damper * (targetPos[1] - d.y) * @force.alpha()
       else
-        r = (d.name?.length ? 10) + 40
-        d.x = Math.max(0, Math.min(@width - r, d.x))
-        d.y = Math.max(r, Math.min(@height - r, d.y))
+        @bbox(d)
 
       "translate(#{d.x + offsetX}, #{d.y + currentOffsetY})"
+
+  bbox: (node) ->
+    r = (node.name?.length ? 10)
+    node.x = Math.max(0, Math.min(@width - r, node.x))
+    node.y = Math.max(5, Math.min(@height - 72, node.y))
+
 
   collide: (node) ->
     nx1 = node.x - 50
