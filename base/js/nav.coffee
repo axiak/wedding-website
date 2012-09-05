@@ -4,34 +4,166 @@ return unless Modernizr.svg
 class NavVisualization
   @links = [
     source: "_root"
+    target: "_s1"
+    thickness: 7
+  ,
+    source: "_root"
+    target: "_s11"
+    thickness: 7
+  ,
+    source: "_s11"
     target: "Home"
     thickness: 7
   ,
     source: "Home"
+    target: "_s21"
+    thickness: 4
+  ,
+    source: "_s21"
+    target: "_s22"
+    thickness: 4
+  ,
+    source: "_s22"
+    target: "_s23"
+    thickness: 4
+  ,
+    source: "_s23"
     target: "How we met"
     thickness: 4
   ,
     source: "How we met"
+    target: "_s31"
+    thickness: 2
+  ,
+    source: "_s31"
+    target: "_s32"
+    thickness: 2
+  ,
+    source: "_s32"
+    target: "_s33"
+    thickness: 2
+  ,
+    source: "_s33"
+    target: "_s34"
+    thickness: 2
+  ,
+    source: "_s34"
+    target: "_s35"
+    thickness: 2
+  ,
+    source: "_s35"
     target: "Photos"
     thickness: 2
   ,
     source: "Home"
+    target: "_s41"
+    thickness: 4
+  ,
+    source: "_s41"
+    target: "_s42"
+    thickness: 4
+  ,
+    source: "_s42"
+    target: "_s43"
+    thickness: 4
+  ,
+    source: "_s43"
+    target: "_s44"
+    thickness: 4
+  ,
+    source: "_s44"
+    target: "_s45"
+    thickness: 4
+  ,
+    source: "_s45"
     target: "Proposal"
     thickness: 4
   ,
     source: "Proposal"
+    target: "_s51"
+    thickness: 2
+  ,
+    source: "_s51"
+    target: "_s52"
+    thickness: 2
+  ,
+    source: "_s52"
+    target: "_s53"
+    thickness: 2
+  ,
+    source: "_s53"
+    target: "_s54"
+    thickness: 2
+  ,
+    source: "_s54"
+    target: "_s55"
+    thickness: 2
+  ,
+    source: "_s55"
     target: "Wedding Party"
     thickness: 2
   ,
     source: "Wedding Party"
+    target: "_s61"
+    thickness: 1
+  ,
+    source: "_s61"
+    target: "_s62"
+    thickness: 1
+  ,
+    source: "_s62"
+    target: "_s63"
+    thickness: 1
+  ,
+    source: "_s63"
+    target: "_s64"
+    thickness: 1
+  ,
+    source: "_s64"
+    target: "_s65"
+    thickness: 1
+  ,
+    source: "_s65"
     target: "Place & Time"
     thickness: 1
   ,
     source: "Wedding Party"
+    target: "_s71"
+    thickness: 1
+  ,
+    source: "_s71"
+    target: "_s72"
+    thickness: 1
+  ,
+    source: "_s72"
+    target: "_s73"
+    thickness: 1
+  ,
+    source: "_s73"
+    target: "_s74"
+    thickness: 1
+  ,
+    source: "_s74"
+    target: "_s75"
+    thickness: 1
+  ,
+    source: "_s75"
     target: "Updates"
     thickness: 1
   ,
     source: "Photos"
+    target: "_s81"
+    thickness: 1
+  ,
+    source: "_s81"
+    target: "_s82"
+    thickness: 1
+  ,
+    source: "_s81"
+    target: "_s82"
+    thickness: 1
+  ,
+    source: "_s82"
     target: "Other Info"
     thickness: 1
   ]
@@ -47,7 +179,7 @@ class NavVisualization
     "Other Info": "/other/"
 
   @pins = ->
-    "_root": [-20, 0, 1]
+    "_root": [-30, -10, 1]
     "Updates": [0.8 * @width, 0.5 * @height]
     "How we met": [0.3 * @width, 0.7 * @height]
     "Place & Time": [0.9 * @width, 0.3 * @height]
@@ -110,6 +242,12 @@ class NavVisualization
   isNodeActive: (node) ->
     node.name is @activeLeaf
 
+  isLinkStem: (d) ->
+    @isNodeStem(d?.source) or @isNodeStem(d?.target)
+
+  isNodeStem: (node) ->
+    !!node.name.match(/^_s/)
+
   isLinkActive: (d) ->
     @isNodeActive(d?.source?.name) or @isNodeActive(d?.target?.name)
 
@@ -132,13 +270,17 @@ class NavVisualization
         else
           -900)
       .linkStrength((d) =>
-        if @isLinkActive(d)
+        if @isLinkStem(d)
+          6
+        else if @isLinkActive(d)
           0.6
         else
           1)
       .theta(1)
       .linkDistance((d) =>
-        if @isLinkActive(d)
+        if @isLinkStem(d)
+          1
+        else if @isLinkActive(d)
           300
         else
           Math.round((@width - 100) / 6))
@@ -166,20 +308,21 @@ class NavVisualization
     @node.enter()
       .append("a")
       .attr("xlink:href", (d) => @hrefs[d.name] ? "#")
-      .attr("class", @activeDefaultHidden("node active", "node", "node"))
+      .attr("class", @activeDefaultHiddenStem("node active", "node", "node", "stem"))
       .call(@force.drag)
       .on("click", @click)
       .append("svg:image")
-      .attr("xlink:href", @activeDefaultHidden(Blog.url("/img/wisteria.png"), Blog.url("/img/wisteria.png"), ""))
-      .attr("width", @defaultIfHidden(27, 0))
-      .attr("height", @defaultIfHidden(72, 0))
+      .attr("xlink:href", @activeDefaultHiddenStem(Blog.url("/img/wisteria.png"), Blog.url("/img/wisteria.png"), "", Blog.url("/img/stem.png")))
+      .attr("width", @activeDefaultHiddenStem(27, 27, 0, 43))
+      .attr("height", @activeDefaultHiddenStem(72, 72, 0, 40))
 
 
     @node.selectAll("image").transition()
-      .attr("xlink:href", @activeDefaultHidden(
+      .attr("xlink:href", @activeDefaultHiddenStem(
         Blog.url("/img/wisteria-active.png"),
         Blog.url("/img/wisteria.png"),
-        ""))
+        "",
+        Blog.url("/img/stem.png")))
 
 
     @text = @textRoot.selectAll("a")
@@ -189,7 +332,7 @@ class NavVisualization
     @textGroup = @text.enter()
       .append("a")
       .attr("xlink:href", (d) => @hrefs[d.name] ? "#")
-      .attr("class", (d) => @activeDefaultHidden("node active", "node", "node"))
+      .attr("class", (d) => @activeDefaultHiddenStem("node active", "node", "node", "stem"))
       .call(@force.drag)
       .on("click", @click)
 
@@ -205,7 +348,7 @@ class NavVisualization
       .text(@defaultIfHidden(((d) -> d.name), ''))
 
     @text.transition()
-      .attr("class", @activeDefaultHidden("node active", "node", "node"))
+      .attr("class", @activeDefaultHiddenStem("node active", "node", "node", "stem"))
 
     @text.exit()
       .remove()
@@ -260,9 +403,11 @@ class NavVisualization
         else
           n
 
-  activeDefaultHidden: (active, def, hidden) ->
+  activeDefaultHiddenStem: (active, def, hidden, stem) ->
     (d) =>
-      if @isHidden(d)
+      if @isNodeStem(d)
+        stem
+      else if @isHidden(d)
         hidden
       else if @isNodeActive(d)
         active
@@ -301,12 +446,15 @@ class NavVisualization
       else
         @bbox(d)
 
+      if @isNodeStem(d)
+        currentOffsetY = -15
+
       "translate(#{d.x + offsetX}, #{d.y + currentOffsetY})"
 
   bbox: (node) ->
     r = (node.name?.length ? 10)
     node.x = Math.max(0, Math.min(@width - r, node.x))
-    node.y = Math.max(5, Math.min(@height - 72, node.y))
+    node.y = Math.max(15, Math.min(@height - 72, node.y))
 
 
   collide: (node) ->
