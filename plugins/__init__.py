@@ -14,7 +14,9 @@ BUCKET = 'yaluandmike'
 AWS_ACCESS_KEY = 'AKIAJHKYVIJRLI3T3VIQ'
 AWS_SECRET_KEY = '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'
 
-GALLERY_DIR = "/home/yalu/Dropbox/Wedding Gallery"
+GALLERY_DIR = os.path.join(os.environ['HOME'], "Dropbox", "Wedding Gallery")
+
+print GALLERY_DIR
 
 def add_photos(obj):
     if not isinstance(obj, jinja2.Template):

@@ -4,10 +4,6 @@ return unless Modernizr.svg
 class NavVisualization
   @links = [
     source: "_root"
-    target: "_s1"
-    thickness: 7
-  ,
-    source: "_root"
     target: "_s11"
     thickness: 7
   ,
@@ -116,14 +112,6 @@ class NavVisualization
     thickness: 1
   ,
     source: "_s63"
-    target: "_s64"
-    thickness: 1
-  ,
-    source: "_s64"
-    target: "_s65"
-    thickness: 1
-  ,
-    source: "_s65"
     target: "Place & Time"
     thickness: 1
   ,
@@ -144,10 +132,6 @@ class NavVisualization
     thickness: 1
   ,
     source: "_s74"
-    target: "_s75"
-    thickness: 1
-  ,
-    source: "_s75"
     target: "Updates"
     thickness: 1
   ,
@@ -166,7 +150,54 @@ class NavVisualization
     source: "_s82"
     target: "Other Info"
     thickness: 1
+  ,
+    source: "Other Info"
+    target: "_s91"
+    thickness: 1
+  ,
+    source: "_s91"
+    target: "_s92"
+    thickness: 1
+  ,
+    source: "_s92"
+    target: "Wedding Party"
+    thickness: 1
   ]
+
+  @linksSimplified = [
+    source: "_root"
+    target: "Home"
+    thickness: 7
+  ,
+    source: "Home"
+    target: "How we met"
+    thickness: 4
+  ,
+    source: "How we met"
+    target: "Photos"
+    thickness: 2
+  ,
+    source: "Home"
+    target: "Proposal"
+    thickness: 4
+  ,
+    source: "Proposal"
+    target: "Wedding Party"
+    thickness: 2
+  ,
+    source: "Wedding Party"
+    target: "Place & Time"
+    thickness: 1
+  ,
+    source: "Wedding Party"
+    target: "Updates"
+    thickness: 1
+  ,
+    source: "Photos"
+    target: "Other Info"
+    thickness: 1
+  ]
+
 
   @hrefs =
     "Home": "/"
@@ -180,15 +211,17 @@ class NavVisualization
 
   @pins = ->
     "_root": [-30, -10, 1]
-    "Updates": [0.8 * @width, 0.5 * @height]
+    "Wedding Party": [0.8 * @width, 0.3 * @height]
+    "Home": [0.05 * @width, 0.3 * @height]
+    #"Updates": [0.8 * @width, 0.5 * @height]
     "How we met": [0.3 * @width, 0.7 * @height]
-    "Place & Time": [0.9 * @width, 0.3 * @height]
-    "Other Info": [0.7 * @width, 0.7 * @height]
-    "Home": [0.01 * @width, 0.3 * @height]
+    #"Place & Time": [0.9 * @width, 0.3 * @height]
+    "Other Info": [0.65 * @width, 0.7 * @height]
+    #"Home": [0.01 * @width, 0.3 * @height]
 
   constructor: (width, height) ->
     $(".main-container").css 'margin-top', '100px'
-    @links = NavVisualization.links
+    @links = if @showDetailed() then NavVisualization.links else NavVisualization.linksSimplified
     @hrefs = NavVisualization.hrefs
     @pins = NavVisualization.pins
     _.bindAll @, "click", "transformFunc", "tick", "defaultIfHidden", "hasHref"
@@ -205,6 +238,7 @@ class NavVisualization
       .attr("height", height)
 
     @linkRoot = @svg.append("svg:g")
+    @stemRoot = @svg.append("svg:g")
     @nodeRoot = @svg.append("svg:g")
     @textRoot = @svg.append("svg:g")
 
@@ -257,18 +291,13 @@ class NavVisualization
       link.source = @nodes[link.source] ? (@nodes[link.source] = {name: link.source})
       link.target = @nodes[link.target] ? (@nodes[link.target] = {name: link.target})
 
+  showDetailed: ->
+    not $.browser.mozilla
+
   setupForce: ->
     @force = d3.layout.force()
-      .gravity(=>
-        if @transitionLayout
-          .9
-        else
-          0.001)
-      .charge((d) =>
-        if @transitionLayout
-          -200
-        else
-          -900)
+      .gravity(=> .001)
+      .charge((d) => -900)
       .linkStrength((d) =>
         if @isLinkStem(d)
           6
@@ -302,37 +331,42 @@ class NavVisualization
 
   buildNodes: ->
     @node = @nodeRoot.selectAll("a")
-      .data(@force.nodes(), (d) ->
-        d.name)
+      .data(_.filter(@force.nodes(), (d) => not @isNodeStem(d)), (d) -> d.name)
 
     @node.enter()
       .append("a")
       .attr("xlink:href", (d) => @hrefs[d.name] ? "#")
-      .attr("class", @activeDefaultHiddenStem("node active", "node", "node", "stem"))
+      .attr("class", @activeDefaultHidden("node active", "node", "node"))
       .call(@force.drag)
       .on("click", @click)
       .append("svg:image")
-      .attr("xlink:href", @activeDefaultHiddenStem(Blog.url("/img/wisteria.png"), Blog.url("/img/wisteria.png"), "", Blog.url("/img/stem.png")))
-      .attr("width", @activeDefaultHiddenStem(27, 27, 0, 43))
-      .attr("height", @activeDefaultHiddenStem(72, 72, 0, 40))
-
+      .attr("xlink:href", @activeDefaultHidden(Blog.url("/img/wisteria.png"), Blog.url("/img/wisteria.png"), ""))
+      .attr("width", @activeDefaultHidden(27, 27, 0))
+      .attr("height", @activeDefaultHidden(72, 72, 0))
 
     @node.selectAll("image").transition()
-      .attr("xlink:href", @activeDefaultHiddenStem(
+      .attr("xlink:href", @activeDefaultHidden(
         Blog.url("/img/wisteria-active.png"),
         Blog.url("/img/wisteria.png"),
-        "",
-        Blog.url("/img/stem.png")))
+        ""))
 
+
+    @stem = @stemRoot.selectAll("image")
+      .data(_.filter(@force.nodes(), @isNodeStem), (d) -> d.name)
+
+    @stem.enter()
+      .append("svg:image")
+      .attr("xlink:href", Blog.url("/img/stem.png"))
+      .attr("width", 43)
+      .attr("height", 40)
 
     @text = @textRoot.selectAll("a")
-       .data(@force.nodes(), (d) -> d.name)
-
+        .data(_.filter(@force.nodes(), @hasHref), (d) -> d.name)
 
     @textGroup = @text.enter()
       .append("a")
       .attr("xlink:href", (d) => @hrefs[d.name] ? "#")
-      .attr("class", (d) => @activeDefaultHiddenStem("node active", "node", "node", "stem"))
+      .attr("class", (d) => @activeDefaultHidden("node active", "node", "node"))
       .call(@force.drag)
       .on("click", @click)
 
@@ -348,12 +382,13 @@ class NavVisualization
       .text(@defaultIfHidden(((d) -> d.name), ''))
 
     @text.transition()
-      .attr("class", @activeDefaultHiddenStem("node active", "node", "node", "stem"))
+      .attr("class", @activeDefaultHidden("node active", "node", "node"))
 
     @text.exit()
       .remove()
 
     @node.exit().remove()
+    @stem.exit().remove()
 
 
   click: (d, i, e) ->
@@ -361,7 +396,6 @@ class NavVisualization
     if href
       @navigate(href, d.name)
       @transitionLayout = true
-      @force.alpha(1)
       @force.start()
       @draw()
       setTimeout((=>
@@ -403,11 +437,9 @@ class NavVisualization
         else
           n
 
-  activeDefaultHiddenStem: (active, def, hidden, stem) ->
+  activeDefaultHidden: (active, def, hidden, stem) ->
     (d) =>
-      if @isNodeStem(d)
-        stem
-      else if @isHidden(d)
+      if @isHidden(d)
         hidden
       else if @isNodeActive(d)
         active
@@ -423,8 +455,9 @@ class NavVisualization
       dr = Math.sqrt(dx * dx + dy * dy) * 5
       "M#{d.source.x},#{d.source.y}A#{dr},#{dr} 0 0,1 #{d.target.x},#{d.target.y}"
 
-    @node.attr("transform", @transformFunc(-6, -2, true))
+    @node.attr("transform", @transformFunc(-6, -10, true))
     @text.attr("transform", @transformFunc(0, 0))
+    @stem.attr("transform", @transformFunc(-6, -12, true))
 
   gaussian: (mu=0, sigma=1) ->
     std = (Math.random() * 2 - 1) + (Math.random() * 2 - 1) + (Math.random() * 2 - 1)
@@ -437,22 +470,20 @@ class NavVisualization
       pins = @getValue('pins')
       targetPos = pins[d.name]
 
+
       if targetPos
         targetPos[0] = Math.round(targetPos[0])
         targetPos[1] = Math.round(targetPos[1])
         damper = targetPos[2] ? 0.3
-        d.x = d.x + damper * (targetPos[0] - d.x) * @force.alpha()
-        d.y = d.y + damper * (targetPos[1] - d.y) * @force.alpha()
+        d.x = (1 - damper) * d.x + damper * targetPos[0]
+        d.y = (1 - damper) * d.y + damper * targetPos[1]
       else
         @bbox(d)
-
-      if @isNodeStem(d)
-        currentOffsetY = -15
 
       "translate(#{d.x + offsetX}, #{d.y + currentOffsetY})"
 
   bbox: (node) ->
-    r = (node.name?.length ? 10)
+    r = (node.name?.length ? 10) * 10
     node.x = Math.max(0, Math.min(@width - r, node.x))
     node.y = Math.max(15, Math.min(@height - 72, node.y))
 
