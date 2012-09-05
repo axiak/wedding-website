@@ -8,6 +8,17 @@ String::toProperCase = ->
 String::toCapitalCase = ->
   @charAt(0).toUpperCase() + @substr(1)
 
+String::hashCode = ->
+  hash = 0
+  if @length is 0
+    return hash
+  i = 0
+  while i < @length
+    hash = ((hash << 5) - hash) + @charCodeAt(i)
+    hash = hash & hash
+    ++i
+  hash
+
 afterPjax = []
 window.$$$ = (callback) ->
   afterPjax.push(callback)

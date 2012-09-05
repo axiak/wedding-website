@@ -210,8 +210,9 @@ class NavVisualization
     "Updates": "/updates/"
     "Other Info": "/other/"
 
+    # "NAME": [pos x, pos y, damping factor [0, 1], ignore bounding box]
   @pins = ->
-    "_root": [-30, -10, 1]
+    "_root": [-30, -10, 1, true]
     "Wedding Party": [0.8 * @width, 0.3 * @height]
     "Home": [0.05 * @width, 0.3 * @height]
     #"Updates": [0.8 * @width, 0.5 * @height]
@@ -449,12 +450,13 @@ class NavVisualization
 
   tick: ->
     @link.attr "d", (d) =>
-      @bbox(d.source)
-      @bbox(d.target)
-      dx = d.target.x - d.source.x
-      dy = d.target.y - d.source.y
+      [sourceX, sourceY] = @pinnedPosition(d.source)
+      [targetX, targetY] = @pinnedPosition(d.target)
+      dx = targetX - sourceX
+      dy = targetY - sourceY
       dr = Math.sqrt(dx * dx + dy * dy) * 5
-      "M#{d.source.x},#{d.source.y}A#{dr},#{dr} 0 0,1 #{d.target.x},#{d.target.y}"
+      dir = Math.abs("#{d.source.name}#{d.target.name}".hashCode()) % 2
+      "M#{sourceX},#{sourceY}A#{dr},#{dr} 0 0,#{dir} #{targetX},#{targetY}"
 
     @node.attr("transform", @transformFunc(-6, -10, true))
     @text.attr("transform", @transformFunc(0, 0))
@@ -468,45 +470,30 @@ class NavVisualization
     (d) =>
       currentOffsetY = offsetY
 
-      pins = @getValue('pins')
-      targetPos = pins[d.name]
-
-
-      if targetPos
-        targetPos[0] = Math.round(targetPos[0])
-        targetPos[1] = Math.round(targetPos[1])
-        damper = targetPos[2] ? 0.3
-        d.x = (1 - damper) * d.x + damper * targetPos[0]
-        d.y = (1 - damper) * d.y + damper * targetPos[1]
-      else
-        @bbox(d)
-
+      [d.x, d.y] = @pinnedPosition(d)
       "translate(#{d.x + offsetX}, #{d.y + currentOffsetY})"
 
-  bbox: (node) ->
+  pinnedPosition: (node) ->
+    pins = @getValue 'pins'
+    targetPos = pins[node.name]
+    if targetPos
+      targetPos[0] = Math.round(targetPos[0])
+      targetPos[1] = Math.round(targetPos[1])
+      damper = targetPos[2] ? 0.1
+      result = [(1 - damper) * node.x + damper * targetPos[0],
+                (1 - damper) * node.y + damper * targetPos[1]]
+      if targetPos[3]
+        result
+      else
+        @bbox(result[0], result[1], node)
+    else
+      @bbox(node.x, node.y, node)
+
+  bbox: (x, y, node) ->
     r = (node.name?.length ? 10) * 10
-    node.x = Math.max(0, Math.min(@width - r, node.x))
-    node.y = Math.max(15, Math.min(@height - 72, node.y))
+    [Math.max(0, Math.min(@width - r, x)),
+     Math.max(15, Math.min(@height - 72, y))]
 
-
-  collide: (node) ->
-    nx1 = node.x - 50
-    nx2 = node.x + 50
-    ny1 = node.y - 40
-    ny2 = node.y + 40
-    (quad, x1, y1, x2, y2) ->
-      if quad.point and (quad.point isnt node)
-        x = node.x - quad.point.x
-        y = node.y - quad.point.y
-        l = Math.sqrt(x * x + y * y)
-        r = node.radius + quad.point.radius
-        if l < r
-          l = (l - r) / l * .5
-          node.x -= x *= l
-          node.y -= y *= l
-          quad.point.x += x
-          quad.point.y += y
-      x1 > nx2 or x2 < nx1 or y1 > ny2 or y2 < ny1
 
 $ ->
   $window = $(window)
