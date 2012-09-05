@@ -2,6 +2,12 @@
 
 window.Blog = window.Blog || {}
 
+String::toProperCase = ->
+  @replace /\w\S*/g, (txt) -> txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+
+String::toCapitalCase = ->
+  @charAt(0).toUpperCase() + @substr(1)
+
 afterPjax = []
 window.$$$ = (callback) ->
   afterPjax.push(callback)
@@ -21,7 +27,10 @@ Blog.$pjax = (url) ->
     success: ->
       _.each afterPjax, (callback) -> callback()
 
+
 Blog.isLive = (window.location.href is "www.yaluandmike.com" or window.location.href is "yaluandmike.com")
+
+Blog.isPhone = -> $(window).width() < 480 or !!(/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent))
 
 Blog.url = (path) ->
   if Blog.isLive
@@ -98,6 +107,18 @@ Blog.loadDisqus = ->
   dsq.src = "#{location.protocol}//#{disqus_shortname}.disqus.com/embed.js#{queryString}";
   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
   $("hr.footer").removeClass("hide")
+
+$$$ ->
+  return unless $("body").hasClass "home"
+  fixImageWidth = ->
+    $(".front-image").width Math.max(
+      $(".main-container").parent().width(),
+      $(".main-container").outerWidth()
+    )
+  $(window).on "resize", _.debounce(fixImageWidth, 50)
+  fixImageWidth()
+  dateDiff = -moment().diff([2013, 04, 13], "days")
+  $(".countdown").html "#{num2str(dateDiff).toCapitalCase()} days until <strong>5/12/13</strong>"
 
 
 $$$ ->

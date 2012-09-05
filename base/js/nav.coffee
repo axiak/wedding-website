@@ -1,4 +1,5 @@
 return unless Modernizr.svg
+return if Blog.isPhone()
 
 
 class NavVisualization
@@ -357,8 +358,8 @@ class NavVisualization
     @stem.enter()
       .append("svg:image")
       .attr("xlink:href", Blog.url("/img/stem.png"))
-      .attr("width", 43)
-      .attr("height", 40)
+      .attr("width", 28)
+      .attr("height", 14)
 
     @text = @textRoot.selectAll("a")
         .data(_.filter(@force.nodes(), @hasHref), (d) -> d.name)
@@ -457,7 +458,7 @@ class NavVisualization
 
     @node.attr("transform", @transformFunc(-6, -10, true))
     @text.attr("transform", @transformFunc(0, 0))
-    @stem.attr("transform", @transformFunc(-6, -12, true))
+    @stem.attr("transform", @transformFunc(-6, -4, true))
 
   gaussian: (mu=0, sigma=1) ->
     std = (Math.random() * 2 - 1) + (Math.random() * 2 - 1) + (Math.random() * 2 - 1)
@@ -509,13 +510,17 @@ class NavVisualization
 
 $ ->
   $window = $(window)
+  $(".navbar-inner").hide()
   windowWidth = $window.width()
+  $navChart = $("#nav-chart")
+  $navChart.width(windowWidth)
   nav = new NavVisualization(windowWidth, 150)
 
 
   $window.on 'resize', _.debounce((->
     return if $window.width() is windowWidth
     nav.width = windowWidth = $window.width()
+    $navChart.width(windowWidth)
     nav.draw()
     ), 100)
 

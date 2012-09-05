@@ -13,7 +13,8 @@ showModal = ->
     backdrop: false
     keyboard: false
     show: true
-  $("#pw-modal form").on 'submit', (e) ->
+
+  checkPassword = (e) ->
     e.preventDefault()
     password = $("#pw-modal .pw-answer").val().toLowerCase()
     if mainPw[hex_sha1(password)]
@@ -25,6 +26,11 @@ showModal = ->
     else
       _gaq.push ['_trackEvent', 'passwordFailure', location.href, password, undefined]
       $("#pw-modal .alert").show()
+
+  $("#pw-modal form").on 'submit', checkPassword
+  $("#pw-modal input[type='submit']").on "click", checkPassword
+  $("#pw-modal .pw-answer").on "change", checkPassword
+
   $(".container").addClass("blurred")
   if $(window).width() >= 480
     $('html').css('overflow', 'hidden')

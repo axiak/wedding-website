@@ -40,15 +40,10 @@
 
 html {
   overflow-y:scroll;
-  background: #cdecc4;
+  background: @beige2;
   background-image: url(//s3.amazonaws.com/yaluandmike/base/img/bg1.png), url(//s3.amazonaws.com/yaluandmike/base/img/bg2.png);
   background-repeat: repeat-x, repeat;
-  background-attachment: fixed;
   text-shadow: 1px 1px rgba(33, 33, 33, 0.1);
-}
-
-html.svg .navbar-inner {
-  display: none;
 }
 
 body {
@@ -63,10 +58,22 @@ body {
   margin-top: 33px;
 }
 
+@media (max-width: 480px) {
+  .main-container {
+    margin-top: none;
+    position: relative;
+    top: -51px;
+    }
+}
+
 h1, h2, h3, h4, h5, h6, .navbar {
   font-family: "Josefin Sans", sans-serif;
   font-weight: 400;
   color: @purple2;
+}
+
+.navbar {
+  font-weight: 600;
 }
 
 h2 {
@@ -85,10 +92,10 @@ h4 {
 
 }
 
-h5, h6, .navbar {
+h5, h6 {
   font-weight: 400;
   b {
-    font-weight: 900;
+    font-weight: 600;
     }
 }
 
@@ -192,6 +199,8 @@ hr.footer {
 
 
 #nav-chart {
+  background: url(//s3.amazonaws.com/yaluandmike/base/img/nav-bg.png) repeat-x;
+  width: 100%;
   a:hover {
     text-decoration: none;
     }
@@ -289,7 +298,7 @@ hr.footer {
 
 footer p {
   font-size: 10px;
-  color: #f0f0f0;
+  color: #aaa;
   text-align: right;
   padding-top: 5px;
 }
@@ -307,25 +316,49 @@ footer p {
     font-size: 1.9em;
     }
 
+  p.countdown {
+    text-align: right;
+    color: #ccc;
+    font-size: 1.3em;
+    strong {
+      font-size: 1.5em;
+      color: #333;
+      }
+    }
+
   .front-image {
-    width: 755px;
     position: relative;
     left: -25px;
-    height: 502px;
-    border: 1px solid @purple2;
-    background: url(//s3.amazonaws.com/yaluandmike/base/img/front.jpg) no-repeat;
-    border-left: none;
-    border-right: none;
-    /*
-    -o-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    -webkit-box-shadow: 4px 4px 5px rgba(74, 38, 86, 0.6);
-    -moz-box-shadow: 4px 4px 5px rgba(74, 38, 86, 0.6);
-    -ms-box-shadow: 4px 4px 5px rgba(74, 38, 86, 0.6);
-    box-shadow: 4px 4px 5px rgba(74, 38, 86, 0.6);
-    */
+    width: 755px;
+    img {
+      width: 100%;
+      border: 1px solid @purple2;
+      border-left: none;
+      border-right: none;
+      /*
+      -o-border-radius: 10px;
+      -moz-border-radius: 10px;
+      -ms-border-radius: 10px;
+      -webkit-border-radius: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 4px 4px 5px rgba(74, 38, 86, 0.6);
+      -moz-box-shadow: 4px 4px 5px rgba(74, 38, 86, 0.6);
+      -ms-box-shadow: 4px 4px 5px rgba(74, 38, 86, 0.6);
+      box-shadow: 4px 4px 5px rgba(74, 38, 86, 0.6);
+      */
+      }
     }
   }
+
+.navbar-inner {
+  #gradient > .vertical(@purple2, @purple3);
+}
+
+.navbar .nav .active > a, .navbar .nav .active > a:hover {
+  background: @purple3;
+}
+@media (max-width: 766px) {
+  .home .main-container .front-image {
+    width: 100%;
+    }
+}
