@@ -19,6 +19,11 @@
 @beige1: #ffffee;
 @beige2: #bfbfa3;
 
+.light-text  {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 400;
+  }
+
 
 @media (min-width: 767px) and (max-width: 1199px) {
   #grid > .core(45px, 15px);
@@ -59,9 +64,25 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6, .navbar {
-  font-family: "Simonetta", "Sans-Serif";
-  font-weight: 900;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 400;
   color: @purple2;
+}
+
+h2 {
+  font-size: 2.5em;
+  line-height: 50px
+}
+
+h3 {
+  font-size: 1.8em;
+  line-height: 40px;
+}
+
+h4 {
+  font-size: 1.5em;
+  line-height: 25px;
+
 }
 
 h5, h6, .navbar {
@@ -272,3 +293,39 @@ footer p {
   text-align: right;
   padding-top: 5px;
 }
+
+.home .main-container {
+
+  h1 {
+    font-size: 5em;
+    line-height: 70px;
+    }
+
+  p {
+    width: 100%;
+    text-align: center;
+    font-size: 1.9em;
+    }
+
+  .front-image {
+    width: 755px;
+    position: relative;
+    left: -25px;
+    height: 502px;
+    border: 1px solid @purple2;
+    background: url(//s3.amazonaws.com/yaluandmike/base/img/front.jpg) no-repeat;
+    border-left: none;
+    border-right: none;
+    /*
+    -o-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 4px 4px 5px rgba(74, 38, 86, 0.6);
+    -moz-box-shadow: 4px 4px 5px rgba(74, 38, 86, 0.6);
+    -ms-box-shadow: 4px 4px 5px rgba(74, 38, 86, 0.6);
+    box-shadow: 4px 4px 5px rgba(74, 38, 86, 0.6);
+    */
+    }
+  }
