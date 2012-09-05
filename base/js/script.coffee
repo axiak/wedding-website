@@ -86,7 +86,7 @@ $$$ ->
   Blog.loadDisqus() if $("#disqus_thread").length
 
 Blog.loadDisqus = ->
-  disqus_shortname = 'yaluandmike'
+  disqus_shortname = window.disqus_shortname = 'yaluandmike'
   return unless $("#disqus_thread").length
   dsq = document.createElement('script')
   dsq.type = 'text/javascript'
