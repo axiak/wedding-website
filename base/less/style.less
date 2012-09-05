@@ -44,6 +44,11 @@ html {
   background-image: url(//s3.amazonaws.com/yaluandmike/base/img/bg1.png), url(//s3.amazonaws.com/yaluandmike/base/img/bg2.png);
   background-repeat: repeat-x, repeat;
   text-shadow: 1px 1px rgba(33, 33, 33, 0.1);
+  display: block;
+}
+
+html.lt-ie9 {
+  background: url(http://s3.amazonaws.com/yaluandmike/base/img/bg2.png) repeat;
 }
 
 body {
@@ -102,11 +107,11 @@ h5, h6 {
 .main-container {
   min-height: 700px;
   background: @beige1; /* #f0f0f0;*/
-  .box-shadow(5px 5px 5px rgba(0, 0, 0, .3));
+  .box-shadow(5px 5px 5px rgba(99, 99, 99, .8));
   .border-radius(5px);
   margin-left: 0;
   padding: 35px 25px 25px;
-
+  behavior: url(/less/PIE.htc);
 }
 
 .main-content {
@@ -182,6 +187,10 @@ hr.footer {
 
 .lt-ie9 .picture-item {
   float: none;
+}
+
+.lt-ie9 .nav li {
+  font-size: 13px;
 }
 
 .gp-gallery-picture-zoom {

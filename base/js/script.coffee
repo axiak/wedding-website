@@ -28,7 +28,7 @@ Blog.$pjax = (url) ->
       _.each afterPjax, (callback) -> callback()
 
 
-Blog.isLive = (window.location.href is "www.yaluandmike.com" or window.location.href is "yaluandmike.com")
+Blog.isLive = _.include(["www.yaluandmike.com", "yaluandmike.com", "server.yaluandmike.com"], window.location.host)
 
 Blog.isPhone = -> $(window).width() < 480 or !!(/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent))
 

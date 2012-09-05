@@ -1,6 +1,6 @@
 return unless Modernizr.svg
 return if Blog.isPhone()
-
+return if /\#novine/.test(location.href)
 
 class NavVisualization
   @links = [
@@ -293,7 +293,7 @@ class NavVisualization
       link.target = @nodes[link.target] ? (@nodes[link.target] = {name: link.target})
 
   showDetailed: ->
-    not $.browser.mozilla
+    /\#leavesdammit/i.test(window.location.href) or not $.browser.mozilla
 
   setupForce: ->
     @force = d3.layout.force()
