@@ -6,11 +6,11 @@ class NavVisualization
   @links = [
     source: "_root"
     target: "_s11"
-    thickness: 7
+    thickness: 5
   ,
     source: "_s11"
     target: "Home"
-    thickness: 7
+    thickness: 5
   ,
     source: "Home"
     target: "_s21"
@@ -49,120 +49,92 @@ class NavVisualization
     thickness: 2
   ,
     source: "_s35"
-    target: "Photos"
+    target: "Proposal"
     thickness: 2
   ,
-    source: "Home"
+    source: "Proposal"
     target: "_s41"
-    thickness: 4
+    thickness: 2
   ,
     source: "_s41"
     target: "_s42"
-    thickness: 4
+    thickness: 2
   ,
     source: "_s42"
     target: "_s43"
-    thickness: 4
+    thickness: 2
   ,
     source: "_s43"
     target: "_s44"
-    thickness: 4
+    thickness: 2
   ,
     source: "_s44"
-    target: "_s45"
-    thickness: 4
-  ,
-    source: "_s45"
-    target: "Proposal"
-    thickness: 4
-  ,
-    source: "Proposal"
-    target: "_s51"
+    target: "Photos"
     thickness: 2
+  ,
+    source: "Wedding Party"
+    target: "_s51"
+    thickness: 1
   ,
     source: "_s51"
     target: "_s52"
-    thickness: 2
+    thickness: 1
   ,
     source: "_s52"
     target: "_s53"
-    thickness: 2
+    thickness: 1
   ,
     source: "_s53"
-    target: "_s54"
-    thickness: 2
-  ,
-    source: "_s54"
-    target: "_s55"
-    thickness: 2
-  ,
-    source: "_s55"
-    target: "Wedding Party"
-    thickness: 2
-  ,
-    source: "Wedding Party"
-    target: "_s61"
-    thickness: 1
-  ,
-    source: "_s61"
-    target: "_s62"
-    thickness: 1
-  ,
-    source: "_s62"
-    target: "_s63"
-    thickness: 1
-  ,
-    source: "_s63"
-    target: "Place & Time"
-    thickness: 1
-  ,
-    source: "Wedding Party"
-    target: "_s71"
-    thickness: 1
-  ,
-    source: "_s71"
-    target: "_s72"
-    thickness: 1
-  ,
-    source: "_s72"
-    target: "_s73"
-    thickness: 1
-  ,
-    source: "_s73"
-    target: "_s74"
-    thickness: 1
-  ,
-    source: "_s74"
-    target: "Updates"
-    thickness: 1
-  ,
-    source: "Photos"
-    target: "_s81"
-    thickness: 1
-  ,
-    source: "_s81"
-    target: "_s82"
-    thickness: 1
-  ,
-    source: "_s81"
-    target: "_s82"
-    thickness: 1
-  ,
-    source: "_s82"
     target: "Other Info"
     thickness: 1
   ,
-    source: "Other Info"
-    target: "_s91"
-    thickness: 1
+    source: "Home"
+    target: "_s61"
+    thickness: 4
   ,
-    source: "_s91"
-    target: "_s92"
-    thickness: 1
+    source: "_s61"
+    target: "_s62"
+    thickness: 4
   ,
-    source: "_s92"
+    source: "_s62"
+    target: "_s63"
+    thickness: 4
+  ,
+    source: "_s63"
+    target: "_s64"
+    thickness: 4
+  ,
+    source: "_s64"
+    target: "Place & Time"
+    thickness: 4
+  ,
+    source: "Place & Time"
+    target: "_s71"
+    thickness: 2
+  ,
+    source: "_s71"
+    target: "_s72"
+    thickness: 2
+  ,
+    source: "_s72"
+    target: "Updates"
+    thickness: 2
+  ,
+    source: "Place & Time"
+    target: "_s81"
+    thickness: 2
+  ,
+    source: "_s81"
+    target: "_s82"
+    thickness: 2
+  ,
+    source: "_s82"
+    target: "_s83"
+    thickness: 2
+  ,
+    source: "_s83"
     target: "Wedding Party"
-    thickness: 1
+    thickness: 2
   ]
 
   @linksSimplified = [
@@ -175,28 +147,28 @@ class NavVisualization
     thickness: 4
   ,
     source: "How we met"
+    target: "Proposal"
+    thickness: 2
+  ,
+    source: "Proposal"
     target: "Photos"
     thickness: 2
   ,
-    source: "Home"
-    target: "Proposal"
-    thickness: 4
-  ,
-    source: "Proposal"
-    target: "Wedding Party"
-    thickness: 2
-  ,
     source: "Wedding Party"
-    target: "Place & Time"
-    thickness: 1
-  ,
-    source: "Wedding Party"
-    target: "Updates"
-    thickness: 1
-  ,
-    source: "Photos"
     target: "Other Info"
     thickness: 1
+  ,
+    source: "Home"
+    target: "Place & Time"
+    thickness: 4
+  ,
+    source: "Place & Time"
+    target: "Updates"
+    thickness: 2
+  ,
+    source: "Place & Time"
+    target: "Wedding Party"
+    thickness: 2
   ]
 
 
@@ -213,13 +185,13 @@ class NavVisualization
     # "NAME": [pos x, pos y, damping factor [0, 1], ignore bounding box]
   @pins = ->
     "_root": [-30, -10, 1, true]
-    "Wedding Party": [0.8 * @width, 0.3 * @height]
     "Home": [0.05 * @width, 0.3 * @height]
-    #"Updates": [0.8 * @width, 0.5 * @height]
-    "How we met": [0.3 * @width, 0.7 * @height]
-    #"Place & Time": [0.9 * @width, 0.3 * @height]
-    "Other Info": [0.65 * @width, 0.7 * @height]
-    #"Home": [0.01 * @width, 0.3 * @height]
+    "How we met": [0.17 * @width, 0.7 * @height]
+    "Place & Time": [0.22 * @width, 0.1 * @height]
+    "Updates": [0.37 * @width, 0.3 * @height]
+    "Other Info": [0.72 * @width, 0.1 * @height]
+    "Photos": [0.85 * @width, 0.3 * @height]
+    "Wedding Party": [0.52 * @width, 0]
 
   constructor: (width, height) ->
     $(".main-container").css 'margin-top', '100px'
@@ -278,6 +250,9 @@ class NavVisualization
   isNodeActive: (node) ->
     node.name is @activeLeaf
 
+  isLinkNotHref: (d) ->
+    @isHidden(d?.source) or @isHidden(d?.target)
+
   isLinkStem: (d) ->
     @isNodeStem(d?.source) or @isNodeStem(d?.target)
 
@@ -311,6 +286,8 @@ class NavVisualization
       .linkDistance((d) =>
         if @isLinkStem(d)
           1
+        else if @isLinkNotHref(d)
+          5
         else if @isLinkActive(d)
           300
         else
@@ -397,12 +374,7 @@ class NavVisualization
     href = @hrefs[d.name]
     if href
       @navigate(href, d.name)
-      @transitionLayout = true
-      @force.start()
       @draw()
-      setTimeout((=>
-        @transitionLayout = false
-        @force.alpha(0.1)), 500)
 
 
 
@@ -479,7 +451,7 @@ class NavVisualization
     if targetPos
       targetPos[0] = Math.round(targetPos[0])
       targetPos[1] = Math.round(targetPos[1])
-      damper = targetPos[2] ? 0.1
+      damper = targetPos[2] ? 0.25
       result = [(1 - damper) * node.x + damper * targetPos[0],
                 (1 - damper) * node.y + damper * targetPos[1]]
       if targetPos[3]
