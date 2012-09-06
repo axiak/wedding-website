@@ -1,5 +1,6 @@
 
 dev:
+	rm -rf public/
 	jinja-static -s base -d public/ -w -f -c static_config.yml
 
 prod:
