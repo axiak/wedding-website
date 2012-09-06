@@ -17,6 +17,8 @@ getMusicListing = (query, callback) ->
         metadata[key] = track
         key)
 
+getMusicListing = _.debounce getMusicListing, 100
+
 highlighter = (item) ->
   query = @query.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&")
   text = item.replace new RegExp("(#{query})", "ig"), ($1, match) ->
