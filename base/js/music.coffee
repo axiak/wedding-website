@@ -52,5 +52,7 @@ $$$ ->
     newRequest = new MusicRequest()
     newRequest.save {name, lastFmUrl, title}
 
+    _gaq.push ['_trackEvent', 'musicRequest', name, title, undefined, true]
+
     $(".alert-success", $form).fadeIn()
     $("#song-name").val('')
