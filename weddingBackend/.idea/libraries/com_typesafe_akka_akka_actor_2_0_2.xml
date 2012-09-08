@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="com.typesafe.akka_akka-actor_2.0.2">
+    <CLASSES>
+      <root url="jar:///opt/play-2.0.3/repository/local/com.typesafe.akka/akka-actor/2.0.2/jars/akka-actor.jar!/"></root>
+    </CLASSES>
+    <JAVADOC> </JAVADOC>
+    <SOURCES> </SOURCES>
+  </library>
+</component>

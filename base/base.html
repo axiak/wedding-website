@@ -105,7 +105,18 @@
   </form>
 </div>
 
-
+<script type="text/javascript">
+  (function(d,t){
+    if (location.protocol!=='https:') return;var st=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    st.src='https://js.stripe.com/v1/';
+    s.parentNode.insertBefore(st,s);
+    {% if env.PROD %}
+    window.STRIPE_KEY = 'pk_08EBYvUXXfMV6TElZXg8YDdR0f3jk';
+    {% else %}
+    window.STRIPE_KEY = 'pk_08EBsycL6RvqpL8WxGcObl7PWMwGc';
+    {% endif %}
+  }(document,'script'));
+</script>
 {# <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> #}
 {% script src="/js/libs/jquery-1.7.2.min.js" %}
 {% script src="/js/libs/underscore.js" %}
@@ -132,11 +143,13 @@
 {% coffee src="/js/password.coffee" %}
 {% coffee src="/js/script.coffee" %}
 {% coffee src="/js/nav.coffee" %}
+{% coffee src="/js/honeymoon.coffee" %}
 {% coffee src="/js/music.coffee" %}
 {% coffee src="/js/blog.coffee" %}
 
 
 {% include "note-tmpl.html" %}
+{% include "honeymoon-tmpl.html" %}
 
 <script type="text/javascript">
 	var _gaq=[['_setAccount','UA-29068066-1'],['_setDomainName', 'yaluandmike.com'],['_setAllowLinker', true],['_trackPageview']];

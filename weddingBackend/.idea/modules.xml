@@ -1,0 +1,9 @@
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea_modules/weddingBackend-build.iml" filepath="$PROJECT_DIR$/.idea_modules/weddingBackend-build.iml" >
+      </module>
+      <module fileurl="file://$PROJECT_DIR$/.idea_modules/weddingBackend.iml" filepath="$PROJECT_DIR$/.idea_modules/weddingBackend.iml" ></module>
+    </modules>
+  </component>
+</project>

@@ -41,8 +41,6 @@ Blog.$pjax = (url) ->
 
 Blog.isLive = _.include(["www.yaluandmike.com", "yaluandmike.com", "server.yaluandmike.com"], window.location.host)
 
-Blog.isPhone = -> $(window).width() < 480 or !!(/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent))
-
 Blog.url = (path) ->
   if Blog.isLive
     "//s3.amazonaws.com/yaluandmike/base#{path}"
@@ -56,6 +54,10 @@ $ ->
   $(document).on 'pjax:start', ->
     $(".outer-container").fadeIn(200)
   _.each afterPjax, (callback) -> callback()
+
+$$$ ->
+  Blog.pjax("a[data-pjax]")
+
 
 if $.browser.mozilla
   popped = false
@@ -101,6 +103,7 @@ $$$ ->
     else
       $li.removeClass "active"
   $("body").attr "class", slugify($("ul.nav li.active").text())
+  $("body").addClass slugify(location.pathname.replace(/\.html$/, '').replace(/(?:^\/|\/$)*/, ''))
 
 $$$ ->
   Blog.loadDisqus() if $("#disqus_thread").length

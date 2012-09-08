@@ -5,4 +5,4 @@ dev:
 
 prod:
 	rm -rf public/
-	jinja-static -s base -d public/ -p -f -c static_config.yml
+	PROD=1 jinja-static -s base -d public/ -p -f -c static_config.yml
