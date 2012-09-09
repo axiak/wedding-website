@@ -1,21 +1,918 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="FacetManager">
-    <facet type="scala" name="Scala">
-      <configuration>
-        <option name="compilerLibraryLevel" value="Project" />
-        <option name="compilerLibraryName" value="scala-compiler" />
-      </configuration>
-    </facet>
+  <component name="EclipseModuleManager">
+    <libelement value="jar:///opt/play/repository/local/play/play_2.9.1/2.0.3/jars/play_2.9.1.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/play/templates_2.9.1/2.0.3/jars/templates_2.9.1.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/com.github.scala-incubator.io/scala-io-file_2.9.1/0.4.0/jars/scala-io-file_2.9.1.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/com.github.scala-incubator.io/scala-io-core_2.9.1/0.4.0/jars/scala-io-core_2.9.1.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/com.github.jsuereth.scala-arm/scala-arm_2.9.1/1.1/jars/scala-arm_2.9.1.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/com.typesafe.akka/akka-actor/2.0.2/jars/akka-actor.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/play/anorm_2.9.1/2.0.3/jars/anorm_2.9.1.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/io.netty/netty/3.5.0.Final/bundles/netty.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.slf4j/slf4j-api/1.6.4/jars/slf4j-api.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.slf4j/jul-to-slf4j/1.6.4/jars/jul-to-slf4j.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.slf4j/jcl-over-slf4j/1.6.4/jars/jcl-over-slf4j.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/ch.qos.logback/logback-core/1.0.0/jars/logback-core.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/ch.qos.logback/logback-classic/1.0.0/jars/logback-classic.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/com.typesafe.akka/akka-slf4j/2.0.2/jars/akka-slf4j.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/com.google.guava/guava/10.0.1/jars/guava.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/com.google.code.findbugs/jsr305/1.3.9/jars/jsr305.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.avaje/ebean/2.7.3/jars/ebean.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/jars/hibernate-jpa-2.0-api.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/com.h2database/h2/1.3.158/jars/h2.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.scala-tools/scala-stm_2.9.1/0.5/jars/scala-stm_2.9.1.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/com.jolbox/bonecp/0.7.1.RELEASE/bundles/bonecp.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.yaml/snakeyaml/1.9/bundles/snakeyaml.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.hibernate/hibernate-validator/4.2.0.Final/jars/hibernate-validator.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/javax.validation/validation-api/1.0.0.GA/jars/validation-api.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.springframework/spring-context/3.0.7.RELEASE/jars/spring-context.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.springframework/spring-core/3.0.7.RELEASE/jars/spring-core.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.springframework/spring-beans/3.0.7.RELEASE/jars/spring-beans.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/joda-time/joda-time/2.0/jars/joda-time.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.joda/joda-convert/1.1/jars/joda-convert.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/javassist/javassist/3.12.1.GA/jars/javassist.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/commons-lang/commons-lang/2.6/jars/commons-lang.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/com.ning/async-http-client/1.7.0/jars/async-http-client.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/oauth.signpost/signpost-core/1.2.1.1/jars/signpost-core.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/com.codahale/jerkson_2.9.1/0.5.0/jars/jerkson_2.9.1.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.codehaus.jackson/jackson-core-asl/1.9.9/jars/jackson-core-asl.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.codehaus.jackson/jackson-mapper-asl/1.9.9/jars/jackson-mapper-asl.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.reflections/reflections/0.9.6/jars/reflections.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/javax.servlet/javax.servlet-api/3.0.1/jars/javax.servlet-api.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/javax.transaction/jta/1.1/jars/jta.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/tyrex/tyrex/1.0.1/jars/tyrex.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/jaxen/jaxen/1.1.3/jars/jaxen.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/net.sf.ehcache/ehcache-core/2.5.0/jars/ehcache-core.jar!/" />
+    <libelement value="jar:///opt/play/repository/cache/mysql/mysql-connector-java/jars/mysql-connector-java-5.1.18.jar!/" />
+    <libelement value="jar:///opt/play/repository/cache/com.stripe/stripe-scala_2.9.1/jars/stripe-scala_2.9.1-1.1.2.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.apache.httpcomponents/httpclient/4.1.2/jars/httpclient.jar!/" />
+    <libelement value="jar:///opt/play/repository/cache/org.apache.httpcomponents/httpcore/jars/httpcore-4.1.2.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/commons-logging/commons-logging/1.1.1/jars/commons-logging.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/commons-codec/commons-codec/1.4/jars/commons-codec.jar!/" />
+    <libelement value="jar:///opt/play/repository/cache/net.liftweb/lift-json_2.9.1/jars/lift-json_2.9.1-2.4-M4.jar!/" />
+    <libelement value="jar:///opt/play/repository/cache/com.thoughtworks.paranamer/paranamer/jars/paranamer-2.3.jar!/" />
+    <libelement value="jar:///opt/play/repository/cache/org.scala-lang/scalap/jars/scalap-2.9.1.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/play/play-test_2.9.1/2.0.3/jars/play-test_2.9.1.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.specs2/specs2_2.9.1/1.9/jars/specs2_2.9.1.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.specs2/specs2-scalaz-core_2.9.1/6.0.1/jars/specs2-scalaz-core_2.9.1.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/com.novocode/junit-interface/0.8/jars/junit-interface.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/junit/junit/4.8.2/jars/junit.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.scala-tools.testing/test-interface/0.5/jars/test-interface.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.fluentlenium/fluentlenium-festassert/0.5.6/jars/fluentlenium-festassert.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.fluentlenium/fluentlenium-core/0.5.6/jars/fluentlenium-core.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.seleniumhq.selenium/selenium-java/2.16.1/jars/selenium-java.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.seleniumhq.selenium/selenium-android-driver/2.16.1/jars/selenium-android-driver.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.seleniumhq.selenium/selenium-remote-driver/2.16.1/jars/selenium-remote-driver.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/cglib/cglib-nodep/2.1_3/jars/cglib-nodep.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.json/json/20080701/jars/json.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.seleniumhq.selenium/selenium-api/2.16.1/jars/selenium-api.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.apache.commons/commons-exec/1.1/jars/commons-exec.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/net.java.dev.jna/jna/3.4.0/jars/jna.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/net.java.dev.jna/platform/3.4.0/jars/platform.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.seleniumhq.selenium/selenium-chrome-driver/2.16.1/jars/selenium-chrome-driver.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.seleniumhq.selenium/selenium-htmlunit-driver/2.16.1/jars/selenium-htmlunit-driver.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/net.sourceforge.htmlunit/htmlunit/2.9/jars/htmlunit.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/xalan/xalan/2.7.1/jars/xalan.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/xalan/serializer/2.7.1/jars/serializer.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/xml-apis/xml-apis/1.3.04/jars/xml-apis.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/commons-collections/commons-collections/3.2.1/jars/commons-collections.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.apache.httpcomponents/httpmime/4.1.2/jars/httpmime.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.apache.httpcomponents/httpcore/4.1.3/jars/httpcore.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/net.sourceforge.htmlunit/htmlunit-core-js/2.9/jars/htmlunit-core-js.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/xerces/xercesImpl/2.9.1/jars/xercesImpl.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/net.sourceforge.nekohtml/nekohtml/1.9.15/jars/nekohtml.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/net.sourceforge.cssparser/cssparser/0.9.5/jars/cssparser.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.w3c.css/sac/1.3/jars/sac.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/commons-io/commons-io/2.0.1/jars/commons-io.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.seleniumhq.selenium/selenium-firefox-driver/2.16.1/jars/selenium-firefox-driver.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.seleniumhq.selenium/selenium-ie-driver/2.16.1/jars/selenium-ie-driver.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.seleniumhq.selenium/selenium-iphone-driver/2.16.1/jars/selenium-iphone-driver.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.seleniumhq.selenium/selenium-support/2.16.1/jars/selenium-support.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.easytesting/fest-assert/1.4/jars/fest-assert.jar!/" />
+    <libelement value="jar:///opt/play/repository/local/org.easytesting/fest-util/1.1.6/jars/fest-util.jar!/" />
+    <conelement value="org.scala-ide.sdt.launching.SCALA_CONTAINER" />
+    <conelement value="org.scala-ide.sdt.launching.SCALA_COMPILER_CONTAINER" />
+    <src_description expected_position="92">
+      <src_folder value="file://$MODULE_DIR$/app" expected_position="0" />
+      <src_folder value="file://$MODULE_DIR$/test" expected_position="1" />
+      <src_folder value="file://$MODULE_DIR$/target/scala-2.9.1/src_managed/main" expected_position="95" />
+    </src_description>
   </component>
-  <component name="NewModuleRootManager" inherit-compiler-output="true">
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/bin" />
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/app" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/target/scala-2.9.1/src_managed/main" isTestSource="false" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="library" name="org.scala-ide.sdt.launching.SCALA_CONTAINER" level="application" />
+    <orderEntry type="module-library">
+      <library name="play_2.9.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/play/play_2.9.1/2.0.3/jars/play_2.9.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="templates_2.9.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/play/templates_2.9.1/2.0.3/jars/templates_2.9.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="scala-io-file_2.9.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/com.github.scala-incubator.io/scala-io-file_2.9.1/0.4.0/jars/scala-io-file_2.9.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="scala-io-core_2.9.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/com.github.scala-incubator.io/scala-io-core_2.9.1/0.4.0/jars/scala-io-core_2.9.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="scala-arm_2.9.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/com.github.jsuereth.scala-arm/scala-arm_2.9.1/1.1/jars/scala-arm_2.9.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="akka-actor.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/com.typesafe.akka/akka-actor/2.0.2/jars/akka-actor.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="anorm_2.9.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/play/anorm_2.9.1/2.0.3/jars/anorm_2.9.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="netty.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/io.netty/netty/3.5.0.Final/bundles/netty.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="slf4j-api.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.slf4j/slf4j-api/1.6.4/jars/slf4j-api.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jul-to-slf4j.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.slf4j/jul-to-slf4j/1.6.4/jars/jul-to-slf4j.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jcl-over-slf4j.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.slf4j/jcl-over-slf4j/1.6.4/jars/jcl-over-slf4j.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="logback-core.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/ch.qos.logback/logback-core/1.0.0/jars/logback-core.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="logback-classic.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/ch.qos.logback/logback-classic/1.0.0/jars/logback-classic.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="akka-slf4j.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/com.typesafe.akka/akka-slf4j/2.0.2/jars/akka-slf4j.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="guava.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/com.google.guava/guava/10.0.1/jars/guava.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jsr305.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/com.google.code.findbugs/jsr305/1.3.9/jars/jsr305.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="ebean.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.avaje/ebean/2.7.3/jars/ebean.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="hibernate-jpa-2.0-api.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/jars/hibernate-jpa-2.0-api.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="h2.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/com.h2database/h2/1.3.158/jars/h2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="scala-stm_2.9.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.scala-tools/scala-stm_2.9.1/0.5/jars/scala-stm_2.9.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="bonecp.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/com.jolbox/bonecp/0.7.1.RELEASE/bundles/bonecp.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="snakeyaml.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.yaml/snakeyaml/1.9/bundles/snakeyaml.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="hibernate-validator.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.hibernate/hibernate-validator/4.2.0.Final/jars/hibernate-validator.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="validation-api.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/javax.validation/validation-api/1.0.0.GA/jars/validation-api.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="spring-context.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.springframework/spring-context/3.0.7.RELEASE/jars/spring-context.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="spring-core.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.springframework/spring-core/3.0.7.RELEASE/jars/spring-core.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="spring-beans.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.springframework/spring-beans/3.0.7.RELEASE/jars/spring-beans.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="joda-time.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/joda-time/joda-time/2.0/jars/joda-time.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="joda-convert.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.joda/joda-convert/1.1/jars/joda-convert.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="javassist.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/javassist/javassist/3.12.1.GA/jars/javassist.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="commons-lang.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/commons-lang/commons-lang/2.6/jars/commons-lang.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="async-http-client.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/com.ning/async-http-client/1.7.0/jars/async-http-client.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="signpost-core.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/oauth.signpost/signpost-core/1.2.1.1/jars/signpost-core.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jerkson_2.9.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/com.codahale/jerkson_2.9.1/0.5.0/jars/jerkson_2.9.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jackson-core-asl.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.codehaus.jackson/jackson-core-asl/1.9.9/jars/jackson-core-asl.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jackson-mapper-asl.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.codehaus.jackson/jackson-mapper-asl/1.9.9/jars/jackson-mapper-asl.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="reflections.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.reflections/reflections/0.9.6/jars/reflections.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="javax.servlet-api.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/javax.servlet/javax.servlet-api/3.0.1/jars/javax.servlet-api.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jta.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/javax.transaction/jta/1.1/jars/jta.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="tyrex.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/tyrex/tyrex/1.0.1/jars/tyrex.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jaxen.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/jaxen/jaxen/1.1.3/jars/jaxen.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="ehcache-core.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/net.sf.ehcache/ehcache-core/2.5.0/jars/ehcache-core.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="mysql-connector-java-5.1.18.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/cache/mysql/mysql-connector-java/jars/mysql-connector-java-5.1.18.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="stripe-scala_2.9.1-1.1.2.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/cache/com.stripe/stripe-scala_2.9.1/jars/stripe-scala_2.9.1-1.1.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="httpclient.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.apache.httpcomponents/httpclient/4.1.2/jars/httpclient.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="httpcore-4.1.2.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/cache/org.apache.httpcomponents/httpcore/jars/httpcore-4.1.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="commons-logging.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/commons-logging/commons-logging/1.1.1/jars/commons-logging.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="commons-codec.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/commons-codec/commons-codec/1.4/jars/commons-codec.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="lift-json_2.9.1-2.4-M4.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/cache/net.liftweb/lift-json_2.9.1/jars/lift-json_2.9.1-2.4-M4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="paranamer-2.3.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/cache/com.thoughtworks.paranamer/paranamer/jars/paranamer-2.3.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="scalap-2.9.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/cache/org.scala-lang/scalap/jars/scalap-2.9.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="org.scala-ide.sdt.launching.SCALA_COMPILER_CONTAINER" level="application" />
+    <orderEntry type="module-library">
+      <library name="play-test_2.9.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/play/play-test_2.9.1/2.0.3/jars/play-test_2.9.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="specs2_2.9.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.specs2/specs2_2.9.1/1.9/jars/specs2_2.9.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="specs2-scalaz-core_2.9.1.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.specs2/specs2-scalaz-core_2.9.1/6.0.1/jars/specs2-scalaz-core_2.9.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="junit-interface.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/com.novocode/junit-interface/0.8/jars/junit-interface.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="junit.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/junit/junit/4.8.2/jars/junit.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="test-interface.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.scala-tools.testing/test-interface/0.5/jars/test-interface.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="fluentlenium-festassert.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.fluentlenium/fluentlenium-festassert/0.5.6/jars/fluentlenium-festassert.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="fluentlenium-core.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.fluentlenium/fluentlenium-core/0.5.6/jars/fluentlenium-core.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="selenium-java.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.seleniumhq.selenium/selenium-java/2.16.1/jars/selenium-java.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="selenium-android-driver.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.seleniumhq.selenium/selenium-android-driver/2.16.1/jars/selenium-android-driver.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="selenium-remote-driver.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.seleniumhq.selenium/selenium-remote-driver/2.16.1/jars/selenium-remote-driver.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="cglib-nodep.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/cglib/cglib-nodep/2.1_3/jars/cglib-nodep.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="json.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.json/json/20080701/jars/json.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="selenium-api.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.seleniumhq.selenium/selenium-api/2.16.1/jars/selenium-api.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="commons-exec.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.apache.commons/commons-exec/1.1/jars/commons-exec.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jna.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/net.java.dev.jna/jna/3.4.0/jars/jna.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="platform.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/net.java.dev.jna/platform/3.4.0/jars/platform.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="selenium-chrome-driver.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.seleniumhq.selenium/selenium-chrome-driver/2.16.1/jars/selenium-chrome-driver.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="selenium-htmlunit-driver.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.seleniumhq.selenium/selenium-htmlunit-driver/2.16.1/jars/selenium-htmlunit-driver.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="htmlunit.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/net.sourceforge.htmlunit/htmlunit/2.9/jars/htmlunit.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="xalan.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/xalan/xalan/2.7.1/jars/xalan.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="serializer.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/xalan/serializer/2.7.1/jars/serializer.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="xml-apis.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/xml-apis/xml-apis/1.3.04/jars/xml-apis.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="commons-collections.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/commons-collections/commons-collections/3.2.1/jars/commons-collections.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="httpmime.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.apache.httpcomponents/httpmime/4.1.2/jars/httpmime.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="httpcore.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.apache.httpcomponents/httpcore/4.1.3/jars/httpcore.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="htmlunit-core-js.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/net.sourceforge.htmlunit/htmlunit-core-js/2.9/jars/htmlunit-core-js.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="xercesImpl.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/xerces/xercesImpl/2.9.1/jars/xercesImpl.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="nekohtml.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/net.sourceforge.nekohtml/nekohtml/1.9.15/jars/nekohtml.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="cssparser.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/net.sourceforge.cssparser/cssparser/0.9.5/jars/cssparser.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="sac.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.w3c.css/sac/1.3/jars/sac.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="commons-io.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/commons-io/commons-io/2.0.1/jars/commons-io.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="selenium-firefox-driver.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.seleniumhq.selenium/selenium-firefox-driver/2.16.1/jars/selenium-firefox-driver.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="selenium-ie-driver.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.seleniumhq.selenium/selenium-ie-driver/2.16.1/jars/selenium-ie-driver.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="selenium-iphone-driver.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.seleniumhq.selenium/selenium-iphone-driver/2.16.1/jars/selenium-iphone-driver.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="selenium-support.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.seleniumhq.selenium/selenium-support/2.16.1/jars/selenium-support.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="fest-assert.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.easytesting/fest-assert/1.4/jars/fest-assert.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="fest-util.jar">
+        <CLASSES>
+          <root url="jar:///opt/play/repository/local/org.easytesting/fest-util/1.1.6/jars/fest-util.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="jdk" jdkName="1.7" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="scala-library" level="project" />
+    <orderEntry type="library" name="scala-compiler" level="project" />
   </component>
 </module>
 

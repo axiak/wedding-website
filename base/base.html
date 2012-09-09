@@ -107,11 +107,13 @@
 
 <script type="text/javascript">
   (function(d,t){
+    window.development = true;
     if (location.protocol!=='https:') return;var st=d.createElement(t),s=d.getElementsByTagName(t)[0];
     st.src='https://js.stripe.com/v1/';
     s.parentNode.insertBefore(st,s);
     {% if env.PROD %}
     window.STRIPE_KEY = 'pk_08EBYvUXXfMV6TElZXg8YDdR0f3jk';
+    window.development = false;
     {% else %}
     window.STRIPE_KEY = 'pk_08EBsycL6RvqpL8WxGcObl7PWMwGc';
     {% endif %}

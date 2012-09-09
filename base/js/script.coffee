@@ -2,6 +2,8 @@
 
 window.Blog = window.Blog || {}
 
+_.sum = (seq) -> _.reduce(seq, ((memo, num) -> memo + num), 0)
+
 String::toProperCase = ->
   @replace /\w\S*/g, (txt) -> txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
 
