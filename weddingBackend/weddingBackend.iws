@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e4f9335c-d29d-498a-b894-c79398c6688f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/conf/evolutions/default/1.sql" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/index.scala.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/main.scala.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea_modules/weddingBackend.iml" afterPath="$PROJECT_DIR$/.idea_modules/weddingBackend.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/Application.scala" afterPath="$PROJECT_DIR$/app/controllers/Application.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/routes" afterPath="$PROJECT_DIR$/conf/routes" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/boot/update.log" afterPath="$PROJECT_DIR$/project/boot/update.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/plugins.sbt" afterPath="$PROJECT_DIR$/project/plugins.sbt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/weddingBackend.iml" afterPath="$PROJECT_DIR$/weddingBackend.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/weddingBackend.ipr" afterPath="$PROJECT_DIR$/weddingBackend.ipr" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/weddingBackend.iws" afterPath="$PROJECT_DIR$/weddingBackend.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../base/base.html" afterPath="$PROJECT_DIR$/../base/base.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../base/js/honeymoon.coffee" afterPath="$PROJECT_DIR$/../base/js/honeymoon.coffee" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../base/less/style.less" afterPath="$PROJECT_DIR$/../base/less/style.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../base/other/gifts.html" afterPath="$PROJECT_DIR$/../base/other/gifts.html" />
     </list>
     <ignored path="weddingBackend.iws" />
     <ignored path=".idea/workspace.xml" />

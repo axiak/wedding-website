@@ -2,22 +2,116 @@
 
 {% block subtitle %}Honeymoon Gift Registry{% endblock %}
 {% block content %}
-<h3>
-  Honeymoon Destination
-</h3>
 
-<p>
-  Hong Kong, Macau, Singapore, maybe Malaysia?
-  <br>
-  Welcome to our honeymoon registry. We are so excited to share our special day with all of you! Yalu's maid of honor, Lucy, has lived in Hong Kong for the past couple of years.. but Mike and Yalu have not visited yet! After the wedding festivities, we are starting off our marriage by embarking on a two-week trip to Southeast Asia to have some great adventures (and memories) there.
-  <br>
-  We are so thankful to already have many of the household items that we'll need to start our home together, so we decided to create a honeymoon registry for those of you interested in helping us make this a time to always remember! What do we hope to do the most there? We hope to spend some quality time with each other, eat the famous food of Hong Kong, and do a lot of cool transportation-related sightseeing.
-</p>
+<div class="gift-sub-page">
+  <h3>
+    Honeymoon Destination
+  </h3>
 
+  <p>
+    Hong Kong, Macau, Singapore, maybe Malaysia?
+    <br>
+    Welcome to our honeymoon registry. We are so excited to share our special day with all of you! Yalu's maid of honor, Lucy, has lived in Hong Kong for the past couple of years.. but Mike and Yalu have not visited yet! After the wedding festivities, we are starting off our marriage by embarking on a two-week trip to Southeast Asia to have some great adventures (and memories) there.
+    <br>
+    We are so thankful to already have many of the household items that we'll need to start our home together, so we decided to create a honeymoon registry for those of you interested in helping us make this a time to always remember! What do we hope to do the most there? We hope to spend some quality time with each other, eat the famous food of Hong Kong, and do a lot of cool transportation-related sightseeing.
+  </p>
 
-<div id="gift-table">
+  <div id="gift-table"></div>
+
+  <a class="btn btn-primary pull-right" href="#" id="honeymoon-continue">Continue</a>
 </div>
 
-  <a class="btn btn-primary pull-right disabled" href="#" id="honeymoon-continue">Continue</a>
+<script type="text/template" id="tmpl-payment">
+  <%= receipt %>
+<form name="payment" class="payment" action=".">
+  <h4>How would you like to pay?</h4>
+  <input type="radio" name="payment-type" value="cash" id="pay-with-cash">
+  <label for="pay-with-cash">Give cash or check at wedding (with certificate)</label>
+  <input type="radio" name="payment-type" value="credit" id="pay-with-card">
+  <label for="pay-with-card">Credit card</label>
+</form>
+
+<div class="credit-card-form hide">
+  <form name="credit-card-form" class="credit-card-form" action="." method="post">
+    <div class="form-horizontal">
+      <div class="control-group">
+        <label class="control-label" for="name">Your Name</label>
+        <div class="controls">
+          <input type="text" id="name" name="name" class="required">
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="email">Your Email</label>
+        <div class="controls">
+          <input type="email" id="email" name="email" class="required">
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="card-number">Credit card number</label>
+        <div class="controls">
+          <input type="text" autocomplete="off" size="20" id="card-number" creditcard="true" class="required stripe-sensitive card-number" placeholder="xxxx-xxxx-xxxx-xxxx">
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="cvc">CVC</label>
+        <div class="controls">
+          <input type="text" size="4" id="cvc" autocomplete="off" class="required stripe-sensitive card-cvc input-mini">
+          <span class="help-inline">(3- or 4-digit code)</span>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">Card Expiration</label>
+        <div class="controls">
+          <select id="card-expiry-month" class="card-expiry-month stripe-sensitive required input-mini">
+            <option value="">--</option>
+            {% for month in range(1, 13) %}
+            <option value="{{ month }}">{{ month }}</option>
+            {% endfor %}
+          </select>
+          <select id="card-expiry-year" class="card-expiry-year stripe-sensitive required input-small">
+            <option value="">--</option>
+            {% for year in range(2012, 2012 + 20) %}
+            <option value="{{ year }}">{{ year }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class='control-label'>Payment Amount</label>
+        <div class="controls">
+          <%= Blog.formatCurrency(Gifts.getTotal()) %>
+        </div>
+      </div>
+
+      <input type="button" class="submit-card-payment btn btn-primary" value="Submit">
+    </div>
+  </form>
+  <div class="cash-form hide"></div>
+
+  <a class="btn back-to-gifts" href="#">Back to selection</a>
+</script>
+
+<script type="text/template" id="tmpl-receipt">
+  <div class="receipt">
+    <h3>Your gift selection</h3>
+    <table class="table table-striped">
+      <% _.each(lineitems, function (item) { %>
+      <tr>
+        <td class="title"><strong><%= item.quantity %></strong> <%= Gifts.itemDetails[item.id].title %></td>
+        <td class="subtotal"><%= Blog.formatCurrency(item.price * item.quantity) %></td>
+      </tr>
+      <% }); %>
+      <tr>
+        <th>Total</th>
+        <th><%= Blog.formatCurrency(Gifts.getTotal()) %></th>
+      </tr>
+    </table>
+  </div>
+</script>
 
 {% endblock %}
