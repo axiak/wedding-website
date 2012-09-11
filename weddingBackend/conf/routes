@@ -1,4 +1,4 @@
 
 # Items
 GET     /api/items/                           controllers.Application.items
-
+POST    /api/payment/                         controllers.Application.payment

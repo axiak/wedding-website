@@ -31,4 +31,23 @@ object Application extends Controller {
       "items" -> Item.all
     )))
   }
+
+  val payment = Action(parse.json) { request =>
+    val badRequest = BadRequest("Invalid Request")
+    //       {"payment":
+    //          {"card":true,"token":"tok_0L3Du26fgb12u2","name":"asdfasdf","email":"mike@axiak.net"},
+    //        "details":[{"id":19,"price":50,"quantity":1}]}
+    ((request.body \ "payment") \ "card").asOpt[Boolean].map { isCard =>
+
+      if (isCard) {
+        val token = (request.body \ "payment" \ "token").as[String]
+
+      } else {
+        Ok("NO card")
+      }
+    }.getOrElse {
+      badRequest
+    }
+
+  }
 }

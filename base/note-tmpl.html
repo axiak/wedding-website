@@ -1,12 +1,12 @@
 
 <script id="tmpl-post" type="text/template">
     <% if (post.showComments) { %>
-    <a href="/notes/" class="show-all" data-pjax>&laquo; show all notes</a>
+    <a href="/updates/" class="show-all" data-pjax>&laquo; show all notes</a>
     <% } %>
 
   <div class="post">
     <h3>
-      <% if (!post.showComments) { %><a href="/notes/?post=<%= post.id %>" data-pjax>
+      <% if (!post.showComments) { %><a href="/updates/?post=<%= post.id %>" data-pjax>
         <% } %>
         <%= post.title ? post.title : "" + post.type.toProperCase() + " Update" %>
     <% if (!post.showComments) { %></a><% } %></h3>
@@ -31,7 +31,7 @@
       <% if (post.showComments) { %>
       <div id="disqus_thread" style="margin-top: 40px;"></div>
       <% } else { %>
-      <a class="comments" href="/notes/?post=<%= post.id %>" data-pjax>See comments</a>
+      <a class="comments" href="/updates/?post=<%= post.id %>" data-pjax>See comments</a>
       <% } %>
     </div>
   </div>
