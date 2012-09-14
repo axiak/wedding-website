@@ -174,8 +174,7 @@ $$$ ->
     if !!(/Android/i.test(navigator.userAgent))
       window.location.href = "https://maps.google.com/maps?saddr=&daddr=42.573768,-70.967039"
       return
-    else if
-      !!(/iPhone|iPad|iPod/i.test(navigator.userAgent))
+    else if !!(/iPhone|iPad|iPod/i.test(navigator.userAgent))
       window.location.href = "https://maps.google.com/maps?saddr=Current%20Location&daddr=42.573768,-70.967039"
       return
     goToDirections = (location) ->
