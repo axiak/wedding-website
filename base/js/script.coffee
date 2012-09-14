@@ -167,3 +167,12 @@ $$$ ->
       $("body").scrollspy
         offset: 20
     ), 100)
+
+$$$ ->
+  $(".directions a").on "click", (e) ->
+    e.preventDefault()
+    goToDirections = (location) ->
+      window.location.href = "https://maps.google.com/maps?saddr=#{location.coords.latitude},#{location.coords.longitude}&daddr=42.573768,-70.967039"
+
+    navigator.geolocation.getCurrentPosition goToDirections, null,
+      timeout: 60000
