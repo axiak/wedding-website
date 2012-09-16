@@ -3,6 +3,7 @@ import os
 from datetime import datetime, timedelta
 import boto
 import mimetypes
+import traceback
 
 from boto.s3.connection import S3Connection, Bucket, Key
 
@@ -21,7 +22,8 @@ def main():
             try:
                 upload_file(conn, full_path)
             except Exception as e:
-                print "Error: {}".format(e)
+                traceback.print_exc()
+
 
 
 def upload_file(conn, full_path):
@@ -32,6 +34,7 @@ def upload_file(conn, full_path):
     expires = expires.strftime("%a, %d %b %Y %H:%M:%S GMT")
     k.set_metadata("Content-Type", mimetypes.guess_type(full_path)[0])
     k.set_metadata("Expires", expires)
+    k.set_metadata("Cache-Control", "max-age={0}, public".format(25 * 365 * 36400))
     k.set_contents_from_filename(full_path)
     k.set_acl('public-read')
     print "{} -> http://s3.amazonaws.com/yaluandmike/{}".format(full_path, full_path)

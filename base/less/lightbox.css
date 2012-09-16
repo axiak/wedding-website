@@ -4,7 +4,7 @@
   top: 0;
   left: 0;
   z-index: 9999;
-  /*background-color: black;*/
+  background-color: black;
   filter: alpha(opacity=85);
   opacity: 0.85;
   display: none;

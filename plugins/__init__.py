@@ -129,6 +129,7 @@ def process_file(aws_conn, filepath):
         expires = expires.strftime("%a, %d %b %Y %H:%M:%S GMT")
         k.set_metadata("Content-Type", mimetypes.guess_type(name)[0])
         k.set_metadata("Expires", expires)
+        k.set_metadata("Cache-Control", "max-age={0}, public".format(86400 * 365 * 25))
         k.set_contents_from_filename(name)
         k.set_acl('public-read')
 
