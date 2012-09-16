@@ -2,7 +2,7 @@ window.Blog = window.Blog || {}
 
 Blog.isPhone = -> $(window).width() < 480 or !!(/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent))
 
-_gaq = window._gaq || []
+_gaq = window._gaq = window._gaq || []
 
 pwCookieName = "_IAMSEEN"
 mainPw =

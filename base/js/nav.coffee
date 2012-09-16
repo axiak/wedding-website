@@ -1,6 +1,7 @@
 return unless Modernizr.svg
 return if Blog.isPhone()
 return if /\#novine/.test(location.href)
+return if not (/\#leavesdammit/i.test(window.location.href) or not $.browser.mozilla)
 
 class NavVisualization
   @links = [
