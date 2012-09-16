@@ -88,7 +88,7 @@ val = $.cookie(pwCookieName)
 if val
   user = mainPw[hex_sha1(val.toLowerCase())]
 if val and user?
-   _gaq.push ["_setCustomVar", 1, "Name", user, 1]
+  _gaq.push ["_setCustomVar", 1, "Name", user, 1]
   authorizeUser()
 else
   if Blog.isPhone()
