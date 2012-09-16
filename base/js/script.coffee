@@ -149,7 +149,11 @@ $$$ ->
   $(".album-container").each ->
     deferred = $.Deferred()
     deferreds.push deferred
-    unless $("html").hasClass "lt-ie9"
+    if $("html").hasClass "lt-ie9" or Blog.isPhone()
+      Code.PhotoSwipe.attach $("a", @),
+        enableMouseWheel: true
+        enableKeyboard: true
+    else
       $container = $(@)
       $container.gpGallery(".picture-item")
     deferred.resolve()
