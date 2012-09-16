@@ -5,26 +5,30 @@
 
 <div class="gift-sub-page">
   <h3>
-    Honeymoon Destination
+    Honeymoon Destination: Hong Kong, Macau, Singapore, Malaysia
   </h3>
 
   <p>
-    Hong Kong, Macau, Singapore, maybe Malaysia?
-    <br>
-    Welcome to our honeymoon registry. We are so excited to share our special day with all of you! Yalu's maid of honor, Lucy, has lived in Hong Kong for the past couple of years.. but Mike and Yalu have not visited yet! After the wedding festivities, we are starting off our marriage by embarking on a two-week trip to Southeast Asia to have some great adventures (and memories) there.
-    <br>
+    Welcome to our honeymoon registry. We are so excited to share our special day with all of you!
+  </p>
+  <p>
+    Yalu's maid of honor, Lucy, has lived in Hong Kong for the past couple of years.. but Mike and Yalu have not visited yet! After the wedding festivities, we are starting off our marriage by embarking on a two-week trip to Southeast Asia to have some great adventures (and memories) there.
+  </p>
+  <p>
     We are so thankful to already have many of the household items that we'll need to start our home together, so we decided to create a honeymoon registry for those of you interested in helping us make this a time to always remember! What do we hope to do the most there? We hope to spend some quality time with each other, eat the famous food of Hong Kong, and do a lot of cool transportation-related sightseeing.
   </p>
 
-  <div id="gift-table"></div>
-
   {% if env.PROD %}
+  <br>
   <div class="alert alert-info">
-    <strong>Note</strong>
-    The gift registry is currently closed. You will be able to purchase or claim individual items on this list nearer to the wedding date.
-    (Definitely by the time you receive an invitation.)
+    <strong>Note:</strong>
+    The following gift registry is an example.
+    It will become active after invitations have been sent out.
   </div>
   {% endif %}
+
+
+  <div id="gift-table"></div>
 
   <a class="btn btn-primary {% if env.PROD %}disabled {% endif %}pull-right" href="#" id="honeymoon-continue">Continue</a>
 </div>
