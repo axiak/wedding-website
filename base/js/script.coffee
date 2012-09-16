@@ -172,13 +172,13 @@ $$$ ->
   $(".directions a").on "click", (e) ->
     e.preventDefault()
     if !!(/Android/i.test(navigator.userAgent))
-      window.location.href = "https://maps.google.com/maps?saddr=&daddr=42.573768,-70.967039"
+      window.location.href = "https://maps.google.com/maps?saddr=&daddr=42.57366132376848, -70.96785485744476"
       return
     else if !!(/iPhone|iPad|iPod/i.test(navigator.userAgent))
-      window.location.href = "https://maps.google.com/maps?saddr=Current%20Location&daddr=42.573768,-70.967039"
+      window.location.href = "https://maps.google.com/maps?saddr=Current%20Location&daddr=42.57366132376848, -70.96785485744476"
       return
     goToDirections = (location) ->
-      window.location.href = "https://maps.google.com/maps?saddr=#{location.coords.latitude},#{location.coords.longitude}&daddr=42.573768,-70.967039"
+      window.location.href = "https://maps.google.com/maps?saddr=#{location.coords.latitude},#{location.coords.longitude}&daddr=42.57366132376848, -70.96785485744476"
 
     navigator.geolocation.getCurrentPosition goToDirections, null,
       timeout: 60000

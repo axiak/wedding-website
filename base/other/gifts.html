@@ -18,7 +18,15 @@
 
   <div id="gift-table"></div>
 
-  <a class="btn btn-primary pull-right" href="#" id="honeymoon-continue">Continue</a>
+  {% if env.PROD %}
+  <div class="alert alert-info">
+    <strong>Note</strong>
+    The gift registry is currently closed. You will be able to purchase or claim individual items on this list nearer to the wedding date.
+    (Definitely by the time you receive an invitation.)
+  </div>
+  {% endif %}
+
+  <a class="btn btn-primary {% if env.PROD %}disabled {% endif %}pull-right" href="#" id="honeymoon-continue">Continue</a>
 </div>
 
 <script type="text/template" id="tmpl-payment">
