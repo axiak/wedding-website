@@ -33,6 +33,8 @@ object Application extends Controller {
   }
 
   val payment = Action(parse.json) { request =>
+    Ok(toJson(Map("test" -> "foo")))
+  /*
     val badRequest = BadRequest("Invalid Request")
     //       {"payment":
     //          {"card":true,"token":"tok_0L3Du26fgb12u2","name":"asdfasdf","email":"mike@axiak.net"},
@@ -48,6 +50,6 @@ object Application extends Controller {
     }.getOrElse {
       badRequest
     }
-
+  */
   }
 }

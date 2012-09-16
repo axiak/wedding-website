@@ -19,7 +19,7 @@ mainPw =
   '2cc5420872645ee927bbd68e9f0025b06ecb6793': 1 # megure
   '2f0431f0bfe30fcf1a1148ad4a3cd170d2237fbe': 1 # sato
   '517d88ca04f7cce2bb7c7d5b3d525a37f3d2b1de': 1 # takagi
-  '37b19054cbc49172edd7fc3e762eb695cac832a1': 1 # ninzaburo
+  'cf63252a0ed01720e41389480846d32c90a547cd': 1 # shiratori
   '8b13d25aa3d2fb6c3db440e0263e1b8f06381b92': 1 # kiyonaga
   'fc5ce85d6ddc60da9b367fd86a6b3a89d426bd64': 1 # agasa
   '2d5cd350c7a48263c670a6374c5c55bca8d1a68a': 1 # suzuki
