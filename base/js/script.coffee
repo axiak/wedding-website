@@ -133,7 +133,7 @@ $$$ ->
     )
   $(window).on "resize", _.debounce(fixImageWidth, 50)
   fixImageWidth()
-  dateDiff = -moment().diff([2013, 04, 13], "days")
+  dateDiff = -moment().diff([2013, 4, 13], "days")
   $(".countdown").html "#{num2str(dateDiff).toCapitalCase()} days until <strong>5/12/13</strong>"
 
 

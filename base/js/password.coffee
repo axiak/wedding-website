@@ -87,6 +87,12 @@ showPrompt = ->
 val = $.cookie(pwCookieName)
 if val
   user = mainPw[hex_sha1(val.toLowerCase())]
+else
+  m = location.hash.match(/^#(.+)/)
+  if m
+    val = m[1]
+    user = mainPw[hex_sha1(val.toLowerCase())]
+
 if val and user?
   _gaq.push ["_setCustomVar", 1, "Name", user, 1]
   authorizeUser()
