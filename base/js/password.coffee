@@ -44,7 +44,6 @@ mainPw =
   'bb11ef2f15b1d3a45f78ae619ca0e2032d932c4b': 'Aunt Li Jun'
   'd7222d8383bf43e96340d057b3ab08022ad453cd': 'Andrew Yoon'
   'e01721035c4856a59f5bcb368d87aef7de0529ae': 'Lynne Burgess Axiak'
-  'e01721035c4856a59f5bcb368d87aef7de0529ae': 'Lynne Burgess Axiak'
   'e30ed5b157c44ee6c435b06bae68b2d106d29035': 'Eleni'
 
 
@@ -104,4 +103,3 @@ else
     showPrompt()
   else
     showModal()
-
