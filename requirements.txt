@@ -1,2 +1,13 @@
--e git://github.com/axiak/jinja-static.git#egg=jinja-static
-boto
+Jinja2==2.6
+Pillow==1.7.8
+PyYAML==3.10
+argh==0.21.1
+argparse==1.2.1
+boto==2.6.0
+envoy==0.0.2
+-e git://github.com/axiak/jinja-static.git@c2ce0e8811505a473608991df3f5c08724d1ae14#egg=jinjastatic-dev
+jinjatag==0.1.6
+networkx==1.7
+pathtools==0.1.2
+watchdog==0.6.0
+wsgiref==0.1.2
