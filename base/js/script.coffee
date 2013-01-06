@@ -137,6 +137,7 @@ $$$ ->
   $(".countdown").html "#{num2str(dateDiff).toCapitalCase()} days until <strong>5/12/13</strong>"
 
 
+
 $$$ ->
   return unless $("body").hasClass "photos"
 

@@ -1,8 +1,11 @@
 window.Blog = window.Blog || {}
+User = window.User = window.User || {}
 
 Blog.isPhone = -> $(window).width() < 480 or !!(/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent))
 
 _gaq = window._gaq = window._gaq || []
+
+
 
 pwCookieName = "_IAMSEEN"
 mainPw =
@@ -45,9 +48,60 @@ mainPw =
   'd7222d8383bf43e96340d057b3ab08022ad453cd': 'Andrew Yoon'
   'e01721035c4856a59f5bcb368d87aef7de0529ae': 'Lynne Burgess Axiak'
   'e30ed5b157c44ee6c435b06bae68b2d106d29035': 'Eleni'
+  '93057c34b230f021581f0efbaf9cb5d5edd05750': 'Jingwen Tao'
+  '24da59d64f6fb251c5c4dab014a7dbfffb9266c0': 'Mary Hong'
+  'd6dd43fceeaf99287c8b9404302ec3afb20517ac': 'Laura Kelly'
+  '6472c73a3f1094a92f361edad4a765840b9646b2': 'Grace Yuen'
 
+rsvpAddresses =
+  'Jingwen Tao': 'Ms. Jingwen Tao'
+  'Mary Hong': 'Ms. Mary Hong'
+  'Laura Kelly': 'Ms. Loura Kelly'
+  'Grace Yuen': 'Ms. Grace Yuen and Mr. Vinay Mahajan'
+  'Eleni Orphanides': 'Ms. Eleni Orphanides and Mr. Ali Wyne'
+  'Jo Osborn': 'Mr. and Mrs. Michael Osborn'
+  'Lilei Xu': 'Ms. Lilei Xu'
+  'Sanya Gurnani': 'Ms. Sanya Gurnani and one guest'
+  'Jeff Burgess': 'Mr. Jeffrey Burgess'
+  'Peter Axiak': 'Mr. and Mrs. Peter Axiak and family'
+  'Mrs. Jiang Alex Jiang Barbara Jiang': 'Mr. and Mrs. Jiang and family'
+  'Tim Yang': 'Mr. Tim Yang'
+  'Rosie Axiak Niebolt': 'Mr. and Mrs. Russ Niebolt'
+  'Monica Mack': 'Mr. and Mrs. Jay Mack'
+  'Chris Burgess': 'Mr. Christopher Burgess and Ms. Lucy Biondi'
+  'Bruce Marcus': 'Mr. and Mrs. Bruce Marcus'
+  'Celia Chen': 'Ms. Celia Chen'
+  'Zhencai & Yehong': 'Mr. Zhencai Wu and Mrs. Yehong Xu'
+  'Dave Burgess': 'Mr. David Burgess'
+  'Mike Shaw': 'Mr. Michael Shaw'
+  'Michael Axiak': 'Mr. Michael Axiak'
+  'Gus Axiaq': 'Mr. and Mrs. Gus Axiaq'
+  'Marie Pantojan': 'Ms. Marie Pantojan and Mr. Eric Hagan'
+  'Sandeep Satish': 'Mr. Sandeep Satish'
+  'Frank Axiak': 'Mr. and Mrs. Frank Axiak'
+  'Cathy Yao': 'Ms. Cathy Yao'
+  'Frank Thanh Cao': 'Mr. Frank Thanh Cao'
+  'Justin Pombrio': 'Mr. Justin Pombrio'
+  'Maureen Axiak': 'Mr. and Mrs. Scott Ringrose and family'
+  'Vicki Zhou': 'Ms. Vicki Zhou and Mr. David Chang'
+  'Luke Burgess': 'Mr. Luke Burgess'
+  'Karl Rieb': 'Mr. and Mrs. Karl Rieb'
+  'Jessie Wang': 'Ms. Jessie Wang'
+  'Javier Hernandez': 'Mr. Javier Hernandez'
+  'Misha Koryak': 'Mr. and Mrs. Misha Koryak'
+  'Virginia Burgess': 'Mr. and Mrs. Fiore Bronga'
+  'Aunt Li Jun': 'Mr. Joe Peng, Ms. Jun Li, and Joy Peng'
+  'Andrew Yoon': 'Mr. Andrew Yoon'
+  'Lynne Burgess Axiak': 'Mrs. Lynne-Marie Axiak'
+  'Eleni': 'Ms. Eleni Orphanides and Mr. Ali Wyne'
 
-authorizeUser = ->
+lookupAddress = (user) ->
+  rsvpAddresses[user]
+
+authorizeUser = (user) ->
+  User.name = user
+  User.rsvpAddress = lookupAddress user
+
   $(".initial-backdrop").remove()
   $('html').css('overflow', '')
   $(".container").removeClass("blurred")
@@ -58,10 +112,10 @@ checkPassword = (password, success, error) ->
   if user?
     _gaq.push ['_trackEvent', 'passwordSuccess', location.href, password, undefined]
     $.cookie pwCookieName, password,
-      expires: 7
+      expires: 31
       path: "/"
     _gaq.push ["_setCustomVar", 1, "Name", user, 1]
-    success()
+    success(user)
   else
     error()
 
@@ -73,8 +127,7 @@ showModal = ->
 
   $("#pw-modal form").on 'submit', (e) ->
     e.preventDefault()
-    checkPassword $("#pw-modal .pw-answer").val(), (->
-      authorizeUser()), (->
+    checkPassword $("#pw-modal .pw-answer").val(), authorizeUser, (->
       $("#pw-modal .alert").show()
     )
 
@@ -97,9 +150,16 @@ else
 
 if val and user?
   _gaq.push ["_setCustomVar", 1, "Name", user, 1]
-  authorizeUser()
+  authorizeUser(user)
 else
   if Blog.isPhone()
     showPrompt()
   else
     showModal()
+
+
+m = window.location.href.match /\/rsvp\/(.+)$/
+if m
+  [base, password] = m
+
+  checkPassword password, authorizeUser, (->)
