@@ -124,6 +124,43 @@ Blog.loadDisqus = ->
   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
   $("hr.footer").removeClass("hide")
 
+
+$$$ ->
+  return unless ($("body").attr("class") or '').match /^rsvp\b/
+  Parse.initialize("7lC1sG3cg8cozBZ6eU3cPei6FlkUAItUZTbTtJ3j", "QtEmWSrzpopTuBVTM44aUAlDIsUFntQXDZagAj96")
+  #  if User.rsvpAddress?
+  #  setTimeout (-> $(".rsvp-address").typeOut(User.rsvpAddress, 18)), 300
+  $form = $("#rsvp-form")
+
+  $container = $("#rsvp-individuals")
+  tmpl = _.template($("#tmpl-individual-rsvp").html())
+
+  individuals = User.rsvpAddress ? ["Guest name"]
+
+  _.each individuals, (name, index) ->
+    $container.append(tmpl({index}))
+    setTimeout (-> $("#name-" + index).typeOut(name, 18)), 300
+
+  $sendReply = $(".send-reply")
+
+  RSVP = Parse.Object.extend("RsvpReply")
+
+  $sendReply.on "click", ->
+    data = _.reduce $form.serializeArray(), ((memo, row) ->
+      {name, value} = row
+      if name is 'name'
+        User.rsvpAddress = value
+      memo[name] = value
+      memo), {}
+
+    newReply = new RSVP()
+    newReply.save data
+
+    _gaq.push ['_trackEvent', 'rsvp', User.rsvpAddress, '', undefined, true]
+
+    alert("sent")
+
+
 $$$ ->
   return unless $("body").hasClass "home"
   fixImageWidth = ->

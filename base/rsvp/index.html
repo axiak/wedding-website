@@ -1,11 +1,74 @@
 {% extends "base.html" %}
-{% block subtitle %}RSVP{% endblock %}
+{% block subtitle %}Reply{% endblock %}
 {% block content %}
 
-<div class="span5">
-<h3>RSVP</h3>
 
-<div>
+<div class="rsvp-address-container">
+  <div class="rsvp-card">
+    <form id="rsvp-form" action="">
+    <div class="rsvp-inside">
+
+      <div id="rsvp-individuals">
+      </div>
+
+      <label for="dietary-concerns"><h3>Please note any additional dietary concerns</h3></label>
+      <textarea id="dietary-concerns" name="dietaryConcerns"></textarea>
+
+      <br>
+      <center>
+        <input type="button" class="btn send-reply" value="Send your reply">
+      </center>
+    </div>
+    </form>
+  </div>
 </div>
+
+<script type="text/template" id="tmpl-individual-rsvp">
+  <div class="individual">
+    <table>
+      <tr>
+        <td colspan="6" class="first"><input type="text" class="rsvp-address fancy-input" name="name<%= index %>" id="name-<%= index %>" placeholder="Guest name"></td>
+      </tr>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          <div class="fancy">
+            <input type="radio" value="none" name="meal<%= index %>" id="unavailable-<%= index %>">
+            <label for="unavailable-<%= index %>"></label>
+          </div>
+          <label for="unavailable-<%= index %>">Can&#8217;t come</label>
+        </td>
+        <td>
+          <div class="fancy">
+            <input type="radio" value="beef" name="meal<%= index %>" id="beef-<%= index %>">
+            <label for="beef-<%= index %>"></label>
+          </div>
+          <label for="beef-<%= index %>">Filet Mignon</label>
+        </td>
+        <td>
+          <div class="fancy">
+            <input type="radio" value="salmon" name="meal<%= index %>" id="salmon-<%= index %>">
+            <label for="salmon-<%= index %>"></label>
+          </div>
+          <label for="salmon-<%= index %>">Salmon</label>
+        </td>
+        <td>
+          <div class="fancy">
+            <input type="radio" value="kid" name="meal<%= index %>" id="kid-<%= index %>">
+            <label for="kid-<%= index %>"></label>
+          </div>
+          <label for="kid-<%= index %>">Kid</label>
+        </td>
+        <td>
+          <div class="fancy">
+            <input type="radio" name="meal<%= index %>" id="vegetarian-<%= index %>" value="vegetarian">
+            <label for="vegetarian-<%= index %>"></label>
+          </div>
+          <label for="vegetarian-<%= index %>">Vegetarian</label>
+        </td>
+      </tr>
+    </table>
+  </div>
+</script>
 
 {% endblock %}
