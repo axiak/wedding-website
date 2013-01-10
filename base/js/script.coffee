@@ -158,8 +158,9 @@ $$$ ->
 
     _gaq.push ['_trackEvent', 'rsvp', User.rsvpAddress, '', undefined, true]
 
-    alert("sent")
+    $(".main-card").animate {left: "-=3000"}, 800
 
+    $(".thank-you").animate {left: "-=3000"}, 800
 
 $$$ ->
   return unless $("body").hasClass "home"

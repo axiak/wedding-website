@@ -134,8 +134,7 @@ showModal = ->
   $("#pw-modal form").on 'submit', (e) ->
     e.preventDefault()
     checkPassword $("#pw-modal .pw-answer").val(), authorizeUser, (->
-      $("#pw-modal .alert").show()
-   )
+      $("#pw-modal .alert").show())
 
   $(".container").addClass("blurred")
   if $(window).width() >= 480
