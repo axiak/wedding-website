@@ -138,7 +138,8 @@ $$$ ->
   individuals = User.rsvpAddress ? ["Guest name"]
 
   _.each individuals, (name, index) ->
-    $container.append(tmpl({index}))
+    isKid = !!name.match(/^(?:miss|mstr)\b/i)
+    $container.append(tmpl({index, isKid}))
     setTimeout (-> $("#name-" + index).typeOut(name, 18)), 300
 
   $sendReply = $(".send-reply")

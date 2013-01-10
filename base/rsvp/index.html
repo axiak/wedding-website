@@ -42,13 +42,14 @@
       </tr>
       <tr>
         <td>&nbsp;&nbsp;&nbsp;</td>
-        <td>
+        <td <%= (isKid) ? 'colspan=2' : '' %>>
           <div class="fancy">
             <input type="radio" value="none" name="meal<%= index %>" id="unavailable-<%= index %>">
             <label for="unavailable-<%= index %>"></label>
           </div>
           <label for="unavailable-<%= index %>">Can&#8217;t come</label>
         </td>
+        <% if (!isKid) { %>
         <td>
           <div class="fancy">
             <input type="radio" value="beef" name="meal<%= index %>" id="beef-<%= index %>">
@@ -63,13 +64,15 @@
           </div>
           <label for="salmon-<%= index %>">Salmon</label>
         </td>
-        <td>
+        <% } %>
+        <td <%= (isKid) ? 'colspan=1' : '' %>>
           <div class="fancy">
             <input type="radio" value="kid" name="meal<%= index %>" id="kid-<%= index %>">
             <label for="kid-<%= index %>"></label>
           </div>
           <label for="kid-<%= index %>">Kid</label>
         </td>
+        <% if (!isKid) { %>
         <td>
           <div class="fancy">
             <input type="radio" name="meal<%= index %>" id="vegetarian-<%= index %>" value="vegetarian">
@@ -77,6 +80,9 @@
           </div>
           <label for="vegetarian-<%= index %>">Vegetarian</label>
         </td>
+        <% } else { %>
+        <td colspan=2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <% } %>
       </tr>
     </table>
   </div>
