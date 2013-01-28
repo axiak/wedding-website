@@ -11,6 +11,7 @@ pwCookieName = "_IAMSEEN"
 mainPw =
   'e30ed5b157c44ee6c435b06bae68b2d106d29035': 'Eleni Orphanides'
   'ecbd8af733a17803b66ee4321b23f87f103cc9ca': 'Ginger Burgess Patrick'
+  '2a11914fc2e2e48f1150f70290179e7a99bc3682': 'Mike & Yalu'
   '46a3775d2e1edfdeb019b376cd02b2335a9ed8e5': 'Lilei Xu'
   '3e2f4de49b3e837daf391fc62ea1b53a0c6a2be7': 'Sanya Gurnani'
   '8b13d25aa3d2fb6c3db440e0263e1b8f06381b92': 'Jeff Burgess'
@@ -38,7 +39,6 @@ mainPw =
   '8c01c025ccce645d143af42af02ce96e52345206': 'Frank Axiak'
   '8df7ba69fc3bae932a2061ca60d27c624d8368ba': 'Alice Chiang'
   '8564e13e1ed441eacfe947f1100b4b059e9d5d51': 'Cathy Yao'
-  'd554fae801dd23ca7dc12dd8932b5a7a85468a3e': 'Frank Thanh Cao'
   'bbdcadf9b6c120e48733747e91858b3fe80ee49a': 'Justin Pombrio'
   '2cc5420872645ee927bbd68e9f0025b06ecb6793': 'Maureen Axiak'
   'f6b5ceec02e8345eb8c3d1a4deb892458b50f984': 'Joseph Axiak'
@@ -72,16 +72,16 @@ individuals =
   'Aunt Li Jun': ['Mr. Joe Peng', 'Ms. Jun Li', 'Miss Joy Peng']
   'Jeff Burgess': ['Mr. Jeff Burgess']
   'Dave Burgess': ['Mr. David Burgess']
+  'Mike & Yalu': ['Mike & Yalu']
   'Karl Rieb': ['Mr. Karl Rieb', 'Mrs. Karl Rieb']
   'Cathy Yao': ['Ms. Cathy Yao']
   'Barbara Jiang': ['Ms. Barbara Jiang']
   'Andrew Yoon': ['Mr. Andrew Yoon']
   'Mike Shaw': ['Mr. Michael Shaw']
   'Jessie Wang': ['Ms. Jessie Wang']
-  'Jon Haber': ['Mr. Jonathan Haber', "Mr. Jonathan Haber's guest"]
+  'Jon Haber': ['Mr. Jonathan Haber']
   'Grace Yuen': ['Ms. Grace Yuen', 'Mr. Vinay Mahajan']
   'Gus Axiaq': ['Mr. Gus Axiaq', 'Mrs. Gus Axiaq']
-  'Frank Thanh Cao': ['Mr. Frank Thanh Tao']
   'Michael Axiak': ['Mr. Michael Axiak']
   'Celia Chen': ['Ms. Celia Chen']
   'Monica Mack': ['Mr. Jay Mack', 'Mrs. Jay Mack']
