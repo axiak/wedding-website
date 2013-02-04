@@ -33,6 +33,7 @@ Gifts.makePayment = (token) ->
       card: true
       token: token
       name: $("#name").val()
+      notes: $("#notes").val()
       email: $("#email").val()
     details: Gifts.getDetails()
   $.ajax
@@ -42,7 +43,45 @@ Gifts.makePayment = (token) ->
     contentType: "application/json;charset=utf-8"
     data: JSON.stringify(request)
     success: (result) ->
+      # SHOW SUCCESS
+    error: (status) ->
       #
+
+Gifts.payWithCard = ->
+  Stripe.setPublishableKey(window.STRIPE_KEY)
+
+  Stripe.createToken {
+    number: $("#card-number").val()
+    cvc: $("#cvc").val()
+    name: $("#name").val()
+    exp_month: $("#card-expiry-month").val()
+    exp_year: $("#card-expiry-year").val()
+  }, (status, response) ->
+    if (response.error)
+      $(".payment-errors").text(response.error.message)
+      $btn.removeAttr "disabled"
+      $btn.removeClass "disabled"
+    else
+      $btn.removeAttr "disabled"
+      $btn.removeClass "disabled"
+      Gifts.makePayment(response.id)
+
+Gifts.payWithCash = ->
+  request =
+    payment:
+      card: false
+      name: $("#name").val()
+      notes: $("#notes").val()
+      email: $("#email").val()
+    details: Gifts.getDetails()
+  $.ajax
+    url: "/api/payment/"
+    type: "POST"
+    dataType: "json"
+    contentType: "application/json;charset=utf-8"
+    data: JSON.stringify(request)
+    success: (result) ->
+      # SHOW SUCCESS
     error: (status) ->
       #
 
@@ -90,12 +129,12 @@ $$$ ->
         .closest(".control-group").removeClass("error").addClass("success")
 
     e.preventDefault()
-    if $(this).val() is "credit"
-      $(".cash-form").slideUp()
+    unless $(".credit-card-form").is(":visible")
       $(".credit-card-form").slideDown()
+    if $(this).val() is "credit"
+      $(".extra-credit-card").slideDown()
     else
-      $(".credit-card-form").slideUp()
-      $(".cash-form").slideDown()
+      $(".extra-credit-card").slideUp()
 
   $(".gift-sub-page").on 'click', '.submit-card-payment', (e) ->
     e.preventDefault()
@@ -103,19 +142,24 @@ $$$ ->
     return if $btn.hasClass "disabled"
     $btn.addClass "disabled"
     $btn.attr "disabled", "disabled"
-    Stripe.setPublishableKey(window.STRIPE_KEY)
 
-    Stripe.createToken {
-      number: $("#card-number").val()
-      cvc: $("#cvc").val()
-      name: $("#name").val()
-      exp_month: $("#card-expiry-month").val()
-      exp_year: $("#card-expiry-year").val()
-    }, (status, response) ->
-      if (response.error)
-        $(".payment-errors").text(response.error.message)
-        $btn.removeAttr "disabled"
-        $btn.removeClass "disabled"
-      else
-        Gifts.makePayment(response.id)
+    if $("#pay-with-card").is(":checked")
+      Gifts.payWithCard()
+    else
+      Gifts.payWithCash()
 
+$$$ ->
+  return unless $("body").hasClass "other-confirm"
+
+  m = window.location.hash.match /^\#(.+)/
+  guid = m[1]
+  confirmTmpl = _.template($("#tmpl-confirmation").html())
+
+  $.ajax
+    url: "/api/payment/confirm/"
+    type: "POST"
+    dataType: "json"
+    contentType: "application/json;charset=utf-8"
+    data: JSON.stringify({guid})
+    success: (response) ->
+      $(".content").html(confirmTmpl(response))

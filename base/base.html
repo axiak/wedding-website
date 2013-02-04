@@ -113,9 +113,9 @@
     st.src='https://js.stripe.com/v1/';
     s.parentNode.insertBefore(st,s);
     {% if env.PROD %}
-    window.STRIPE_KEY = 'pk_08EBYvUXXfMV6TElZXg8YDdR0f3jk';
-    {% else %}
     window.STRIPE_KEY = 'pk_08EBsycL6RvqpL8WxGcObl7PWMwGc';
+    {% else %}
+    window.STRIPE_KEY = 'pk_08EBYvUXXfMV6TElZXg8YDdR0f3jk';
     {% endif %}
   }(document,'script'));
 </script>

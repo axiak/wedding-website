@@ -60,36 +60,46 @@
         </div>
       </div>
 
-      <div class="control-group">
-        <label class="control-label" for="card-number">Credit card number</label>
-        <div class="controls">
-          <input type="text" autocomplete="off" size="20" id="card-number" creditcard="true" class="required stripe-sensitive card-number" placeholder="xxxx-xxxx-xxxx-xxxx">
+      <div class="extra-credit-card hide">
+
+        <div class="control-group">
+          <label class="control-label" for="card-number">Credit card number</label>
+          <div class="controls">
+            <input type="text" autocomplete="off" size="20" id="card-number" creditcard="true" class="required stripe-sensitive card-number" placeholder="xxxx-xxxx-xxxx-xxxx">
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="cvc">CVC</label>
+          <div class="controls">
+            <input type="text" size="4" id="cvc" autocomplete="off" class="required stripe-sensitive card-cvc input-mini">
+            <span class="help-inline">(3- or 4-digit code)</span>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Card Expiration</label>
+          <div class="controls">
+            <select id="card-expiry-month" class="card-expiry-month stripe-sensitive required input-mini">
+              <option value="">--</option>
+              {% for month in range(1, 13) %}
+              <option value="{{ month }}">{{ month }}</option>
+              {% endfor %}
+            </select>
+            <select id="card-expiry-year" class="card-expiry-year stripe-sensitive required input-small">
+              <option value="">--</option>
+              {% for year in range(2012, 2012 + 20) %}
+              <option value="{{ year }}">{{ year }}</option>
+              {% endfor %}
+            </select>
+          </div>
         </div>
       </div>
 
       <div class="control-group">
-        <label class="control-label" for="cvc">CVC</label>
+        <label class="control-label" for="notes">Notes (for the couple)</label>
         <div class="controls">
-          <input type="text" size="4" id="cvc" autocomplete="off" class="required stripe-sensitive card-cvc input-mini">
-          <span class="help-inline">(3- or 4-digit code)</span>
-        </div>
-      </div>
-
-      <div class="control-group">
-        <label class="control-label">Card Expiration</label>
-        <div class="controls">
-          <select id="card-expiry-month" class="card-expiry-month stripe-sensitive required input-mini">
-            <option value="">--</option>
-            {% for month in range(1, 13) %}
-            <option value="{{ month }}">{{ month }}</option>
-            {% endfor %}
-          </select>
-          <select id="card-expiry-year" class="card-expiry-year stripe-sensitive required input-small">
-            <option value="">--</option>
-            {% for year in range(2012, 2012 + 20) %}
-            <option value="{{ year }}">{{ year }}</option>
-            {% endfor %}
-          </select>
+          <textarea type="text" id="notes" name="notes"></textarea>
         </div>
       </div>
 
@@ -99,6 +109,8 @@
           <%= Blog.formatCurrency(Gifts.getTotal()) %>
         </div>
       </div>
+
+      <div class="payment-errors error"></div>
 
       <input type="button" class="submit-card-payment btn btn-primary" value="Submit">
     </div>
