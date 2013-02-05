@@ -30,9 +30,9 @@ i=0
 
 while [ $(ps aux | grep celeryd | grep -cv grep) -ne 0 ]; do
     if [[ $i -gt 4 ]]; then
-        ps aux | grep celeryd | awk '{print $2}' | xargs -n 32 killall -9
+        ps aux | grep celeryd | grep -v grep | awk '{print $2}' | xargs -n 32 kill -9
     else
-        ps aux | grep celeryd | awk '{print $2}' | xargs -n 32 killall
+        ps aux | grep celeryd | grep -v grep | awk '{print $2}' | xargs -n 32 kill
     fi
     sleep .25
     i=$((i + 1))
