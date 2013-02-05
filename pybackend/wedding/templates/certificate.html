@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Gift Certificate</title>
+        <style type="text/css">
+            @page {
+                size: {{ pagesize }};
+                margin: 1cm;
+                @frame certificate {
+            -pdf-frame-content: main;
+            -pdf-frame-border: 1;
+            margin-left: 1cm;
+            background-color: #f9f6e9;
+            width: 710px;
+            height: 5in;
+            border: 2px solid #543054;
+
+                }
+            }
+            .top {
+            width: 720px;
+            height: 222px;
+            }
+
+            body {
+            color: #543054;
+            font-family: 'Helvetica'
+            }
+        </style>
+    </head>
+    <body bgcolor="white">
+        <div id="main">
+          <div height="400" style="400px">
+            <img class="top" src="http://s3.amazonaws.com/yaluandmike/base/img/border.jpg" width="740" height=232 alt=""/>
+            <h1>A Gift for Yalu and Michael</h1>
+            {% for item in items %}
+            <p> - {{ item.human_amount }}</p>
+            {% endfor %}
+            asdf
+          </div>
+        </div>
+    </body>
+</html>

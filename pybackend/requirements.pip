@@ -1,6 +1,6 @@
 Flask==0.9
 Flask-Celery==2.4.3
-Flask-Mail==0.7.4
+Flask-Mail==0.6.1
 Flask-SQLAlchemy==0.15
 Flask-Script==0.3.3
 Jinja2==2.6
@@ -13,10 +13,19 @@ argparse==1.2.1
 billiard==2.7.3.19
 blinker==1.2
 celery==3.0.13
+chardet==2.1.1
 decorator==3.4.0
+html5lib==0.95
 ipython==0.13.1
 jinjatag==0.1.6
 kombu==2.5.4
+lamson==1.1
+lockfile==0.9.1
+mock==1.0.1
+nose==1.2.1
+pisa==3.0.33
+pyPdf==1.13
+python-daemon==1.6
 python-dateutil==1.5
 requests==1.1.0
 sqlparse==0.1.4

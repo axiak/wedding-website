@@ -23,7 +23,7 @@
       <%= Blog.formatCurrency(item.price) %>
     </td>
     <td>
-      <select name="item-<%= item.id %>">
+      <select name="item-<%= item.id %>" class="item-quantity">
         <option value="0">--</option>
         <% for (var i = 1; i <= (item.requested - item.purchased); ++i) { %>
         <option value="<%= i %>"><%= i %></option>

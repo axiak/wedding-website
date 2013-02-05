@@ -21,11 +21,13 @@ Gifts.getTotal = ->
   ))
 
 Gifts.getDetails = ->
-  return Gifts.oldDetails if Gifts.oldDetails
-  _.filter(_.map($("#gift-table tr[data-id]"), (elem) ->
+  return Gifts.details unless $(".gift-table tr[data-id]").length
+  Gifts.details = _.filter(_.map($(".gift-table tr[data-id]"), (elem) ->
     quantity = parseInt($("select", elem).val())
     price = $(elem).data('price')
     {id: $(elem).data('id'), price: price, quantity: quantity}), (item) -> item.quantity)
+
+  Gifts.details
 
 Gifts.makePayment = (token) ->
   request =
@@ -43,9 +45,9 @@ Gifts.makePayment = (token) ->
     contentType: "application/json;charset=utf-8"
     data: JSON.stringify(request)
     success: (result) ->
-      # SHOW SUCCESS
+      Gifts.showHtml($("#tmpl-confirm-card").html())
     error: (status) ->
-      #
+      Gifts.enableSubmit()
 
 Gifts.payWithCard = ->
   Stripe.setPublishableKey(window.STRIPE_KEY)
@@ -59,11 +61,8 @@ Gifts.payWithCard = ->
   }, (status, response) ->
     if (response.error)
       $(".payment-errors").text(response.error.message)
-      $btn.removeAttr "disabled"
-      $btn.removeClass "disabled"
+      Gifts.enableSubmit()
     else
-      $btn.removeAttr "disabled"
-      $btn.removeClass "disabled"
       Gifts.makePayment(response.id)
 
 Gifts.payWithCash = ->
@@ -81,16 +80,35 @@ Gifts.payWithCash = ->
     contentType: "application/json;charset=utf-8"
     data: JSON.stringify(request)
     success: (result) ->
-      # SHOW SUCCESS
+      Gifts.showHtml($("#tmpl-confirm-paper").html())
     error: (status) ->
-      #
+      Gifts.enableSubmit()
+
+
+Gifts.enableSubmit = ->
+  $btn = $(".gift-sub-page .submit-card-payment")
+  $btn.removeAttr "disabled"
+  $btn.removeClass "disabled"
+
+Gifts.oldHtml = []
 
 Gifts.showReceipt = ->
-  $root = $(".gift-sub-page")
-  Gifts.oldHtml = $root.html()
   paymentTmpl = _.template($("#tmpl-payment").html())
   receiptTmpl = _.template($("#tmpl-receipt").html())
-  $root.html(paymentTmpl(receipt: receiptTmpl(lineitems: Gifts.getDetails())))
+  Gifts.showHtml(paymentTmpl(receipt: receiptTmpl(lineitems: Gifts.getDetails())))
+
+
+Gifts.showHtml = (html) ->
+  $root = $(".gift-sub-page")
+  Gifts.oldHtml.push $root.html()
+  $root.html(html)
+
+
+Gifts.goBack = ->
+  $root = $(".gift-sub-page")
+  html = Gifts.oldHtml.pop()
+  $root.html(html) if html?
+
 
 $$$ ->
   template = false
@@ -108,17 +126,27 @@ $$$ ->
     tbody = _.map(data, (item) ->
       template(item: item)).join("")
 
-    $("#gift-table").html(mainTemplate(tbody: tbody))
+    $(".gift-table").html(mainTemplate(tbody: tbody))
 
-  $("#gift-table").on "change", "select", (e) ->
+  $(".gift-sub-page").on "change", "select.item-quantity", (e) ->
     e.preventDefault()
-    $("#gift-table .total").text("Total: #{Blog.formatCurrency(Gifts.getTotal())}")
+    total = Gifts.getTotal()
+    $(".gift-table .total").text("Total: #{Blog.formatCurrency(total)}")
+    $button = $(".honeymoon-continue")
+    if total
+      $button.removeClass "disabled"
+    else
+      $button.addClass "disabled"
 
-  $("#honeymoon-continue").on "click", (e) ->
+  $(".gift-sub-page").on "click", ".honeymoon-continue", (e) ->
     e.preventDefault()
     return if $(@).hasClass "disabled"
     Gifts.oldDetails = Gifts.getDetails()
     Gifts.showReceipt()
+
+  $(".gift-sub-page").on "click", ".back-to-gifts", (e) ->
+    e.preventDefault()
+    Gifts.goBack()
 
   $(".gift-sub-page").on "change", "input[name='payment-type']", (e) ->
     $("form.credit-card-form").validate

@@ -77,7 +77,7 @@ individuals =
   'Cathy Yao': ['Ms. Cathy Yao']
   'Barbara Jiang': ['Ms. Barbara Jiang']
   'Andrew Yoon': ['Mr. Andrew Yoon']
-  'Mike Shaw': ['Mr. Michael Shaw']
+  'Mike Shaw': ['Mr. Michael Shaw', 'Ms. Jillynne Quinn']
   'Jessie Wang': ['Ms. Jessie Wang']
   'Jon Haber': ['Mr. Jonathan Haber']
   'Grace Yuen': ['Ms. Grace Yuen', 'Mr. Vinay Mahajan']
@@ -169,11 +169,18 @@ else
   if Blog.isPhone()
     showPrompt()
   else
-    showModal()
+
+    m = window.location.href.match /\/rsvp\/(.+)$/
+    if m
+      [base, password] = m
+      checkPassword password, authorizeUser, (->)
+
+    else if location.href.match '\/other\/'
+      authorizeUser ''
+      window._disablePjax = true
+
+    else
+      showModal()
 
 
-m = window.location.href.match /\/rsvp\/(.+)$/
-if m
-  [base, password] = m
 
-  checkPassword password, authorizeUser, (->)

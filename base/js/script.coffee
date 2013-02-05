@@ -26,6 +26,7 @@ window.$$$ = (callback) ->
   afterPjax.push(callback)
 
 Blog.pjax = (selector) ->
+  return if window._disablePjax
   $(selector).pjax
     fragment: ".main-subcontainer"
     container: ".outer-container"
@@ -33,6 +34,9 @@ Blog.pjax = (selector) ->
       _.each afterPjax, (callback) -> callback()
 
 Blog.$pjax = (url) ->
+  if window._disablePjax
+    location.href = url
+    return
   $.pjax
     url: url
     fragment: ".main-subcontainer"

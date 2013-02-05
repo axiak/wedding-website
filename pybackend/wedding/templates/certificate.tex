@@ -1,0 +1,85 @@
+\documentclass[letterpaper,12pt]{article}
+
+\usepackage{colors}
+\usepackage[margin=.5in]{geometry}
+\usepackage{tikz}
+\usepackage{graphics}
+\usetikzlibrary{shapes,snakes}
+\usepackage{calligra}
+\usepackage{avant}
+\renewcommand*\familydefault{\sfdefault}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\begin{document}
+
+\thispagestyle{empty}
+
+\definecolor{mybg}{RGB}{249,246,233}
+\definecolor{mytext}{RGB}{84,48,84}
+
+% Define box and box title style
+\tikzstyle{mybox} = [draw=mytext, fill=mybg, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=20pt]
+
+\begin{tikzpicture}
+\node [mybox] (box){
+  \color{mytext}
+  \begin{minipage}{6.7in}
+    \vspace*{-.68cm}
+    \includegraphics[width=\textwidth]{./border.png}
+
+    \vspace{.6cm}
+
+    \begin{tabular}{lr}
+
+      \parbox{4.35in}{
+
+        {\bf \calligra \huge A Gift for$\ldots$}
+        {\Large \calligra Yalu and Michael }
+
+        \begin{itemize}
+
+          {% for item in items %}
+          \item{ {{ item.human_amount }} }
+          {% endfor %}
+
+        \end{itemize}
+
+        Notes: \\
+
+%        \begin{tabular}{ll}
+%          \parbox{0.1cm}{
+%            \hfill
+%          }
+%          \parbox{3in}{
+
+%            \framebox[3in]{
+%              \begin{minipage}{3in}
+%                \hfill\vspace{1in}
+%              \end{minipage}
+%            }
+%          }
+
+%        \end{tabular}
+
+        \vspace*{1in}
+
+        {\small From {{ name }} }
+
+      }
+     \parbox{2.4in}{
+
+       \vspace{.5in}
+
+       \setlength\fboxsep{0pt}
+       \setlength\fboxrule{1pt}
+       \fcolorbox{mytext}{mybg}{\includegraphics[width=2.2in]{./us.jpg}}
+     }
+
+     \end{tabular}
+
+    \end{minipage}
+};
+\end{tikzpicture}%
+
+\end{document}

@@ -96,7 +96,6 @@ def log_queries(app):
         def emit(self, record):
             if record.args and record.thread in self.last_queries:
                 params = list(record.args[0].params)
-                print params
                 for key, value in enumerate(params):
                     if isinstance(value, bool):
                         params[key] = {True: 1, False: 0}[value]
@@ -104,7 +103,10 @@ def log_queries(app):
                         params[key] = value
                     else:
                         params[key] = "'{}'".format(value)
-                sql = self.last_queries[record.thread] % tuple(params)
+                try:
+                    sql = self.last_queries[record.thread] % tuple(params)
+                except:
+                    sql = self.last_queries[record.thread]
                 print '\nSQL Query\n{}'.format('=' * 45)
                 pprint_query(sql)
                 print '\n'

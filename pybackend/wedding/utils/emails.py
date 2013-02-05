@@ -2,9 +2,10 @@ import os
 import json
 import jinjatag
 
-from flaskext.mail import Message
+from flaskext.mail import Message, Attachment
 
 from wedding.app import app
+from wedding.utils import certificate
 
 __all__ = (
     'send_confirmation_email',
@@ -23,7 +24,7 @@ def send_confirmation_email(payment):
         'confirm_url': app.construct_url('/other/confirm.html#{0}'.format(payment.token)),
         'payment': payment
     }
-    return send_message('confirmation.html', payment.email, **context)
+    return send_message('confirmation.html', payment.email, bcc=['couple@yaluandmike.com'], **context)
 
 
 @app.celery.task(name="mail.certificate", ignore_results=True)
@@ -31,7 +32,13 @@ def send_certificate_email(payment):
     context = {
         'payment': payment
     }
-    return send_message('certificate.html', payment.email, **context)
+    with certificate.certificate(payment) as pdffile:
+        attachments = [
+            Attachment(filename='gift-certificate.pdf',
+                       content_type='application/pdf',
+                       data=pdffile.read())
+        ]
+        return send_message('certificate.html', payment.email, bcc=['couple@yaluandmike.com'], attachments=attachments, **context)
 
 
 @app.celery.task(name="mail.send", ignore_results=True)

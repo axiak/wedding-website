@@ -38,11 +38,20 @@ def handle_payment():
 @views.json_response
 def handle_confirmation():
     data = flask.request.json
-    payments = Payment.query.filter(Payment.token == data.get('guid', '')).limit(1).all()
-    if not payments:
+    payment = Payment.query.filter(Payment.token == data.get('guid', '')).limit(1).first()
+
+    if not payment:
         return {}, 404
-    else:
-        return {"name": payments[0].name}
+
+    payment.charge_id = "paper"
+    payment.payment_time = datetime.datetime.now()
+
+    db.session.add(payment)
+    db.session.commit()
+
+    emails.send_certificate_email(payment)
+
+    return {"name": payment.name}
 
 
 def handle_card(data):
