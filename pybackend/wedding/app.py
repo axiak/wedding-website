@@ -36,7 +36,8 @@ debug.log_queries(app)
 
 mail = Mail(app)
 manager = Manager(app)
-celery = Celery(app)
+celery = Celery(__name__)
+celery.conf.add_defaults(app.config)
 install_commands(manager)
 app.celery = celery
 
