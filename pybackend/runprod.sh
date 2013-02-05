@@ -1,6 +1,9 @@
 #!/bin/bash
 cd $(dirname "$0")
 
+source /usr/local/bin/virtualenvwrapper.sh &>/dev/null
+source /usr/bin/virtualenvwrapper.sh &>/dev/null
+
 workon wedding
 
 pip install -r requirements.pip --upgrade
@@ -23,3 +26,16 @@ done
 
 uwsgi --master -b 32768 -d ./logs/uwsgi.log -pp $VIRTUAL_ENV -H $VIRTUAL_ENV --socket 127.0.0.1:3031 --processes $NUM_PROCS --module wedding:app
 
+i=0
+
+while [ $(ps uax | grep celeryd | grep -cv grep) -ne 0]; do
+    if [[ $i -gt 4 ]]; then
+        ps aux | grep celeryd | awk '{print $2}' | xargs killall -9
+    else
+        ps aux | grep celeryd | awk '{print $2}' | xargs killall
+    fi
+    sleep .25
+    i=$((i + 1))
+done
+
+nohup python manage.py celeryd --autoreload -c 5 -f ./logs/celeryd &>/dev/null &
