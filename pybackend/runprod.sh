@@ -28,14 +28,14 @@ uwsgi --master -b 32768 -d ./logs/uwsgi.log -pp $VIRTUAL_ENV -H $VIRTUAL_ENV --s
 
 i=0
 
-while [ $(ps uax | grep celeryd | grep -cv grep) -ne 0]; do
+while [ $(ps aux | grep celeryd | grep -cv grep) -ne 0 ]; do
     if [[ $i -gt 4 ]]; then
-        ps aux | grep celeryd | awk '{print $2}' | xargs killall -9
+        ps aux | grep celeryd | awk '{print $2}' | xargs -n 32 killall -9
     else
-        ps aux | grep celeryd | awk '{print $2}' | xargs killall
+        ps aux | grep celeryd | awk '{print $2}' | xargs -n 32 killall
     fi
     sleep .25
     i=$((i + 1))
 done
 
-nohup python manage.py celeryd --autoreload -c 5 -f ./logs/celeryd &>/dev/null &
+nohup python manage.py celeryd -c 5 -f ./logs/celeryd &>/dev/null &
