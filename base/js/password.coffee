@@ -9,6 +9,7 @@ _gaq = window._gaq = window._gaq || []
 pwCookieName = "_IAMSEEN"
 
 mainPw =
+  '7cba3fa3d7e1a1422a23706b304e0e8b0058bbc9': 'Elias Torres'
   'e30ed5b157c44ee6c435b06bae68b2d106d29035': 'Eleni Orphanides'
   'ecbd8af733a17803b66ee4321b23f87f103cc9ca': 'Ginger Burgess Patrick'
   '2a11914fc2e2e48f1150f70290179e7a99bc3682': 'Mike & Yalu'
@@ -26,6 +27,7 @@ mainPw =
   '517d88ca04f7cce2bb7c7d5b3d525a37f3d2b1de': 'Chris Burgess'
   '24765b4c90fc2e23473c676ae4ed89a28c4ecf1e': 'Bruce Marcus'
   'b652819ff5bcc22c7ad49282998c384337f7da21': 'Celia Chen'
+  'bdfff7006d3a5967c7c741d652a74f5445442e11': 'Kayla Gill'
   'd7222d8383bf43e96340d057b3ab08022ad453cd': 'Andrew Yoon'
   '28c2def44d63e33804a47aaf04226f8f95ef6f91': 'Jo Osborn'
   '37b19054cbc49172edd7fc3e762eb695cac832a1': 'Dave Burgess'
@@ -55,6 +57,7 @@ mainPw =
   'ed256594e8b90f8922f5ecbc055eec313e4b24c4': 'Jon Haber'
   '6472c73a3f1094a92f361edad4a765840b9646b2': 'Grace Yuen'
   'c45cd80a556f432a3607171a6818cd5a074b5cd4': 'Zhencai & Yehong'
+  'a9fb3a65b11f852f2544b744909225d409d45377': 'Vance Baugham'
   'a480de7811283751e1558c5703081da73e4d3190': 'Virginia Burgess'
   'bb11ef2f15b1d3a45f78ae619ca0e2032d932c4b': 'Aunt Li Jun'
   'd6dd43fceeaf99287c8b9404302ec3afb20517ac': 'Laura Kelly'
@@ -62,7 +65,7 @@ mainPw =
 
 individuals =
   'Lucy Wu': ['Ms. Lucy Wu']
-  'Sandeep Satish': ['Mr. Sandeep Satish']
+  'Vance Baugham': ['Mr. Vance Baugham', 'Ms. Lucy Qian']
   'Lynne Burgess Axiak': ['Mrs. Lynne-Marie Axiak']
   'Mary Axiak': ['Mrs. Mary Axiak']
   'Bruce Marcus': ['Mr. Bruce Marcus', 'Mrs. Bruce Marcus']
@@ -87,18 +90,21 @@ individuals =
   'Monica Mack': ['Mr. Jay Mack', 'Mrs. Jay Mack']
   'Frank Axiak': ['Mr. Frank Axiak', 'Mrs. Frank Axiak']
   'Mary Hong': ['Ms. Mary Hong']
+  'Sandeep Satish': ['Mr. Sandeep Satish']
   'Adam Buggia': ['Mr. Adam Buggia', 'Ms. Sandra Ryeom']
   'Javier Hernandez': ['Mr. Javier Hernandez']
   'Marie Pantojan': ['Ms. Marie Pantojan', 'Mr. Eric Hagan']
   'Justin Pombrio': ['Mr. Justin Pombrio']
   'Xiumin Zeng': ['Ms. Xiumin Zeng']
   'Eleni Orphanides': ['Ms. Eleni Orphanides', 'Mr. Ali Wyne']
+  'Kayla Gill': ['Ms. Kayla Gill', 'Mr. Sunny Suraj Bali']
+  'Jingwen Tao': ['Ms. Jingwen Tao']
   'Joseph Axiak': ['Mr. Joseph Axiak']
   'Virginia Burgess': ['Mr. Fiore Bronga', 'Mrs. Fiore Bronga']
   'Michael Price': ['Mr. Michael Price', 'Ms. Michelle Bentivegna']
   'Luke Burgess': ['Mr. Luke Burgess']
   'Lilei Xu': ['Ms. Lilei Xu']
-  'Jingwen Tao': ['Ms. Jingwen Tao']
+  'Elias Torres': ['Mr. Elias Torres', 'Mrs. Elias Torres']
   'Laura Kelly': ['Ms. Laura Kelly']
   'Ginger Burgess Patrick': ['Mr. Frank Patrick', 'Mrs. Frank Patrick']
   'Alice Chiang': ['Ms. Alice Chiang', 'Mr. Matthew Herpich']
@@ -110,7 +116,7 @@ individuals =
   'Maureen Axiak': ['Mr. Scott Ringrose', 'Mrs. Scott Ringrose', 'Mstr. Nathaniel Ringrose', 'Miss Penelope Ringrose']
   'Sanya Gurnani': ['Ms. Sanya Gurnani', "Ms. Sanya Gurnani's guest"]
   'Mrs. Jiang': ['Mr. Yongping Jiang', 'Ms. Xiaofang Jiang']
-  'Tim Yang': ['Mr. Tim Yang']
+  'Tim Yang': ['Mr. Tim Yang']  
 
 authorizeUser = (user) ->
   User.name = user
