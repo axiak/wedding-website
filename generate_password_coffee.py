@@ -13,11 +13,11 @@ def main():
     site_names = defaultdict(lambda: [])
     individual_names = {}
     for row in read:
-        if not row[7].strip():
+        if not row[10].strip():
             continue
-        encoded = digest(row[7])
+        encoded = digest(row[10])
         site_names[encoded].append(row[0])
-        names = filter(None, row[8:])
+        names = filter(None, row[11:])
         individual_names[row[0]] = names
     for key, value in site_names.items():
         name = ','.join(value)

@@ -17,6 +17,7 @@ mainPw =
   '3e2f4de49b3e837daf391fc62ea1b53a0c6a2be7': 'Sanya Gurnani'
   '8b13d25aa3d2fb6c3db440e0263e1b8f06381b92': 'Jeff Burgess'
   '272d162ce4173a0480e0834a48421bc5b0a26da8': 'Peter Axiak'
+  '5561a8d1ecfd1fe0978cbf17851e48406756a742': 'Tolu Ogunbekun'
   '0e90f57f919997b6b84e56b2670e322d657aeec8': 'Xiumin Zeng'
   '22be77c0cadb4da6085e45c68e23e88f7a6f8ea3': 'Mrs. Jiang'
   'a4cc67914272a99c2327ec4a5fdb375aa6eb3847': 'Alex Jiang'
@@ -51,6 +52,7 @@ mainPw =
   'cf63252a0ed01720e41389480846d32c90a547cd': 'Luke Burgess'
   '93057c34b230f021581f0efbaf9cb5d5edd05750': 'Jingwen Tao'
   '9ce4a065c671b95bde016b295e58d25ceb42a7ae': 'Karl Rieb'
+  'e85cd87f0a20825d79f44b66688073a05d3b64ba': 'Toshi Shepard-Ohta'
   '40e8d131d243ae5019bd9f78ebeaab7b3cef1ea3': 'Jessie Wang'
   'd4f224401418efc592961bc3a2a4e56fbb0c4c28': 'Mary Axiak'
   '8ed95a2ba150b18f11f78776b6324c9e22fcbad8': 'Javier Hernandez'
@@ -79,6 +81,7 @@ individuals =
   'Karl Rieb': ['Mr. Karl Rieb', 'Mrs. Karl Rieb']
   'Cathy Yao': ['Ms. Cathy Yao']
   'Barbara Jiang': ['Ms. Barbara Jiang']
+  'Toshi Shepard-Ohta': ['Mr. Toshi Shepard-Ohta', 'guest']
   'Andrew Yoon': ['Mr. Andrew Yoon']
   'Mike Shaw': ['Mr. Michael Shaw', 'Ms. Jillynne Quinn']
   'Jessie Wang': ['Ms. Jessie Wang']
@@ -111,12 +114,13 @@ individuals =
   'Alex Jiang': ['Ms. Alex Jiang']
   'Chris Burgess': ['Mr. Christopher Burgess', 'Ms. Lucy Biondi']
   'Rosie Axiak Niebolt': ['Mr. Russ Niebolt', 'Mrs. Russ Niebolt']
+  'Tolu Ogunbekun': ['Ms. Tolu Ogunbekun']
   'Jo Osborn': ['Mr. Michael Osborn', 'Mrs. Michael Osborn']
   'Vicki Zhou': ['Ms. Vicki Zhou', 'Mr. David Chang']
   'Maureen Axiak': ['Mr. Scott Ringrose', 'Mrs. Scott Ringrose', 'Mstr. Nathaniel Ringrose', 'Miss Penelope Ringrose']
   'Sanya Gurnani': ['Ms. Sanya Gurnani', "Ms. Sanya Gurnani's guest"]
   'Mrs. Jiang': ['Mr. Yongping Jiang', 'Ms. Xiaofang Jiang']
-  'Tim Yang': ['Mr. Tim Yang']  
+  'Tim Yang': ['Mr. Tim Yang']
 
 authorizeUser = (user) ->
   User.name = user

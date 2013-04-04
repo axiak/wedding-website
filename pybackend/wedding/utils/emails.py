@@ -27,6 +27,14 @@ def send_confirmation_email(payment):
     return send_message('confirmation.html', payment.email, bcc=['couple@yaluandmike.com'], **context)
 
 
+def send_invitation(name, email, rsvp_code):
+    context = {
+        'name': name,
+        'rsvp_code': rsvp_code
+    }
+    return send_message('invitation.html', email, bcc=['couple@yaluandmike.com'], **context)
+
+
 @app.celery.task(name="mail.certificate", ignore_results=True)
 def send_certificate_email(payment):
     context = {
