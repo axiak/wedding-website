@@ -8,4 +8,4 @@ from wedding.utils import rest
 @app.route('/api/items/', methods=['GET'])
 @rest.get_many
 def get_items():
-    return Item.query.all()
+    return Item.query.order_by(Item.purchased - Item.requested).all()
