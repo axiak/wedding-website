@@ -64,6 +64,7 @@ mainPw =
   'bb11ef2f15b1d3a45f78ae619ca0e2032d932c4b': 'Aunt Li Jun'
   'd6dd43fceeaf99287c8b9404302ec3afb20517ac': 'Laura Kelly'
   '8c634acad2c607b4b196590a6d7151ebffd566b2': 'Michael Price'
+  '540e181495e58ae347a7b94e7f43007e0a35a3c1': 'Friends'
 
 individuals =
   'Lucy Wu': ['Ms. Lucy Wu']
