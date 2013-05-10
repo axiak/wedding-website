@@ -54,6 +54,34 @@ def handle_confirmation():
     return {"name": payment.name}
 
 
+@app.route("/api/payment/report/", methods=["GET"])
+def get_report():
+    data = flask.request.args
+    if data.get('test') != 'malteaser':
+        return 'not allowed'
+    from cStringIO import StringIO
+    import csv
+    tmp = StringIO()
+    writer = csv.writer(tmp)
+    writer.writerow(['Name', 'Notes', 'Item', 'Qty', 'Amount', 'Paid'])
+    previous_name = None
+    for payment in Payment.query.order_by('name').all():
+        for lineitem in payment.items():
+            row = []
+            name = payment.name
+            if previous_name != name:
+                row.extend([name, payment.notes])
+                previous_name = name
+            else:
+                row.extend(['', ''])
+            qty = lineitem.num
+            item = lineitem.item()
+            row.extend([item.title, qty, item.price * qty])
+            row.append('No' if payment.charge_id == 'paper' else 'Yes')
+            writer.writerow(row)
+    response = flask.Response(tmp.getvalue(), mimetype='text/csv')
+    return response
+
 def handle_card(data):
     session = db.session
     payment = data['payment']
