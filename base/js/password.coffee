@@ -146,6 +146,8 @@ checkPassword = (password, success, error) ->
     error()
 
 showModal = ->
+  if 1368244800000 < new Date().getTime() < 1368417600000
+    return
   $("#pw-modal").modal
     backdrop: false
     keyboard: false
